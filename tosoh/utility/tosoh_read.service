@@ -1,0 +1,10 @@
+[Unit]
+Description=excahnge data between tosoh and inbox/outbox using G8 protocol
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/root/tosoh/tosoh_read.py
+
+[Install]
+WantedBy=multi-user.target
