@@ -1,0 +1,10 @@
+[Unit]
+Description=exchange data of inbox/outbox with mssql parsing LIS3 format
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/root/rp500/lis3_mysql.py
+
+[Install]
+WantedBy=multi-user.target

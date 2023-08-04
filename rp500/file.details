@@ -1,0 +1,37 @@
+.:
+total 76
+-rw-r--r-- 1 root root     0 Mar 31 00:27 file.details
+-rw-r--r-- 1 root root 35149 Feb 25 11:49 LICENSE
+-rw-r--r-- 1 root root  3111 Mar 29 01:36 lis3_client_common.py
+-rwxr-xr-x 1 root root  3640 Mar 30 23:44 lis3_client.py
+-rw-r--r-- 1 root root   524 Mar 30 23:45 lis3_conf.py
+-rwxr-xr-x 1 root root  5671 Mar 30 23:39 lis3_mysql.py
+drwxr-xr-x 2 root root  4096 Mar 30 23:32 misc
+drwxr-xr-x 2 root root  4096 Mar 30 23:45 __pycache__
+-rw-r--r-- 1 root root    87 Mar 30 23:33 README.md
+-rwxr-xr-x 1 root root    86 Mar 31 00:26 update_astmbi_unix.sh
+drwxr-xr-x 2 root root  4096 Mar 30 23:29 utility
+
+./misc:
+total 28
+-rwxr-xr-x 1 root root 2989 Mar 26 00:07 lis3333.py
+-rwxr-xr-x 1 root root 2416 Mar 25 23:11 lis333.py
+-rwxr-xr-x 1 root root 2334 Mar  2 01:05 lis33.py
+-rwxr-xr-x 1 root root 3401 Mar 26 23:46 lis3_client.py.good.working
+-rwxr-xr-x 1 root root 2356 Mar  2 00:34 lis3.py
+-rwxr-xr-x 1 root root 2720 Mar  1 23:54 lis3.py.backup
+-rw-r--r-- 1 root root 2721 Mar  6 00:07 try.txt
+
+./__pycache__:
+total 8
+-rw-r--r-- 1 root root 3998 Mar 30 23:37 lis3_client_common.cpython-37.pyc
+-rw-r--r-- 1 root root  524 Mar 30 23:45 lis3_conf.cpython-37.pyc
+
+./utility:
+total 24
+-rwxr-xr-x 1 root root 147 Mar 30 23:24 COPY_SERVICE.sh
+-rwxr-xr-x 1 root root 129 Mar 30 23:25 INSTALL_SERVICE.sh
+-rwxr-xr-x 1 root root 122 Mar 30 23:26 mk_folders
+-rwxr-xr-x 1 root root 160 Mar 30 23:27 reset_everything.sh
+-rwxr-xr-x 1 root root 225 Mar 30 23:28 rp500_read.service
+-rwxr-xr-x 1 root root 201 Mar 30 23:29 rp500_write.service
