@@ -1,0 +1,4 @@
+mkdir /root/vitros.inbox.data/
+mkdir /root/vitros.inbox.arch/
+mkdir /root/vitros.outbox.data/
+mkdir /root/vitros.outbox.arch/
