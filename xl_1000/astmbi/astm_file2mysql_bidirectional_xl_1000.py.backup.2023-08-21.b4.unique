@@ -12,7 +12,7 @@ from astm_file2mysql_bidirectional_general import astm_file
 
 #For mysql password
 sys.path.append('/var/gmcs_config')
-import astm_var_clg as astm_var
+import astm_var
 
 #classes#################################
 class astm_file_xl1000(astm_file):
@@ -44,9 +44,7 @@ class astm_file_xl1000(astm_file):
 
           if(sample_id.rstrip(' ').isnumeric() == False):
             print_to_log('sample_id is not number:',sample_id)
-            ##Now find sample id for it
-            self.find_sample_id_for_unique_id(con,sample_id)
-            continue;   
+            return False;
                   
           print_to_log('R tuple:',each_record)
           ex_code=each_record[2].split(self.s3)[3]
@@ -92,8 +90,6 @@ class astm_file_xl1000(astm_file):
           for sample_id in sample_id_list:
             if(sample_id.rstrip(' ').isnumeric() == False):
               print_to_log('sample_id is not number:',sample_id)
-              ##Now find sample id for it
-              self.find_sample_id_for_unique_id(con,sample_id)
               continue;
             
             #get examination codes
@@ -238,90 +234,6 @@ class astm_file_xl1000(astm_file):
       logging.debug(msg)
       return False
     return ex_id[0]
-
-
-    ''' PHP logic
-    function get_sample_id_for_any_sid_single_id($link,$id)
-    {
-        if(ctype_digit($id)){return $id;}
-        /*$sql='select 
-                    examination_id,
-                    json_extract(edit_specification,\'$.unique_prefix\') as unique_prefix,
-                    json_extract(edit_specification,\'$.table\') as id_table 
-                from examination 
-                where 
-                    json_extract(edit_specification,\'$.type\')="id_single_sample" or 
-                    json_extract(edit_specification,\'$.type\')="id_multi_sample"';
-        */
-        $sql='select 
-                    examination_id,
-                    json_extract(edit_specification,\'$.unique_prefix\') as unique_prefix,
-                    json_extract(edit_specification,\'$.table\') as id_table 
-                from examination 
-                where 
-                    json_extract(edit_specification,\'$.type\')="id_single_sample"';
-                    
-        //echo $sql.'<br>';
-        $result=run_query($link,$GLOBALS['database'],$sql);
-        if(get_row_count($result)<=0){return false;}
-        while($ar=get_single_row($result))
-        {
-            
-            //echo '<h1>id='.$id.'</h1>';
-            //echo '<h1>'.$ar['unique_prefix'].'</h1>';
-            //echo '<h1>final prefix='.trim($ar['unique_prefix'],'"').'</h1>';
-            $prefix=trim($ar['unique_prefix'],'"');
-            if($prefix==substr($id,0,strlen($prefix)))
-            {
-                $sql_get='select sample_id from `'.trim($ar['id_table'],'"').'` where id=\''.substr($id,strlen($prefix)).'\'';
-                //echo $sql_get;
-                $result_get=run_query($link,$GLOBALS['database'],$sql_get);
-                if(get_row_count($result_get)<=0){return false;}
-                $ar_get=get_single_row($result_get);
-                //echo $ar_get['sample_id'];
-                return $ar_get['sample_id'];
-            }
-        }
-        return false;
-    }
-
-    '''
-  def find_sample_id_for_unique_id(self,con,uid):
-    logging.debug('find_sample_id_for_unique_id(self,con,uid): sample id is not number. but,unique id provided is {}'.format(uid))
-    
-    prepared_sql='select \
-                        examination_id, \
-                        json_extract(edit_specification,\'$.unique_prefix\') as unique_prefix, \
-                        json_extract(edit_specification,\'$.table\') as id_table \
-                    from examination \
-                    where \
-                        json_extract(edit_specification,\'$.type\')="id_single_sample"';
-    
-    logging.debug('find_sample_id_for_unique_id(self,con,uid): prepared_sql is:\n {}'.format(prepared_sql))
-    cur=self.run_query(con,prepared_sql,())
-    logging.debug("one data:{}".format(cur))
-    data=self.get_single_row(cur)
-    while data:
-      logging.debug("one data:{}".format(data))
-      striped_data=(data[0],data[1].lstrip('"').rstrip('"'),data[2].lstrip('"').rstrip('"'))
-      logging.debug("one striped data:{}".format(striped_data))
-      logging.debug("unique prefix length data in uid is : {} ?=? {} : is unique _prefix is".format(uid[0:len(striped_data[1])],striped_data[1]))
-      if(uid[0:len(striped_data[1])]==striped_data[1]):
-        #logging.debug(">>>>search table={} , search id is={}".format(striped_data[2], uid[len(striped_data[1]):] ))
-        table_name=striped_data[2]
-        unique_id=uid[len(striped_data[1]):]
-        logging.debug(">>>>search table={} , search id is={}".format(table_name,unique_id))
-        prepared_sql_for_finding_sample_id="select sample_id from %s where id=%s";
-        logging.debug("prepared_sql_for_finding_sample_id = {}".format(prepared_sql_for_finding_sample_id))
-        
-        data_tpl_for_finding_sample_id=(table_name,unique_id)
-        logging.debug("data_tpl_for_finding_sample_id = {}".format(data_tpl_for_finding_sample_id))
-        
-        cur_for_finding_sample_id=self.run_query(con,prepared_sql_for_finding_sample_id,data_tpl_for_finding_sample_id)
-        data_for_finding_sample_id=self.get_single_row(cur_for_finding_sample_id)
-        logging.debug('sample id relate data found is: {}'.format(data_for_finding_sample_id))
-      data=self.get_single_row(cur)
-    return
 
 def print_to_log(object1,object2):
   logging.debug('{} {}'.format(object1,object2))
