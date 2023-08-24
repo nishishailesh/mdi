@@ -38,23 +38,27 @@ class astm_file_xl1000(astm_file):
 
       for each_record in each_sample[1]:
         if(each_record[0]=='R'):
-          
-          sample_id=each_sample[0]
-          print_to_log('sample_id',sample_id)
-
-          if(sample_id.rstrip(' ').isnumeric() == False):
-            print_to_log('sample_id is not number:',sample_id)
+          query_sample_id=each_sample[0].rstrip(' ')
+          print_to_log('query_sample_id',query_sample_id)
+          #####Unique ID code
+          if(query_sample_id.isnumeric() == True):
+            real_sample_id=query_sample_id
+          else:
+            print_to_log('query_sample_id is not number:',query_sample_id)
             ##Now find sample id for it
-            returned_sample_id=self.find_sample_id_for_unique_id(con,sample_id)
-            if(sample_id!=False):
-              sample_id=returned_sample_id
+            real_sample_id=self.find_sample_id_for_unique_id(con,query_sample_id)
+            print_to_log('real_sample_id={}'.format(real_sample_id),'query_sample_id={}'.format(query_sample_id))
+            if(real_sample_id!=False):
+              real_sample_id=str(real_sample_id)
+              print_to_log('real_sample_id after converting to string is: ', real_sample_id)
             else:
-              continue;   
-                  
+              print_to_log('skipping order generation, because, No real_sample_id  is found.for unique ID=', query_sample_id)
+              continue;
+            print_to_log('final real sample id as str =',real_sample_id)
+          #get examination codes
           print_to_log('R tuple:',each_record)
           ex_code=each_record[2].split(self.s3)[3]
-          ex_result=each_record[3]
-          
+          ex_result=each_record[3]          
           uniq=each_record[12]+'|'+conf.equipment
           examination_id=self.get_eid_for_sid_code(con,sample_id,ex_code)
           if(examination_id==False):
@@ -64,8 +68,7 @@ class astm_file_xl1000(astm_file):
           msg='{}={}'.format(examination_id,ex_result)
           print_to_log('examination_id={}'.format(examination_id),'ex_result={}'.format(ex_result))
           
-          data_tpl=(sample_id,examination_id,ex_result,uniq,ex_result)
-          
+          data_tpl=(real_sample_id,examination_id,ex_result,uniq,ex_result)
           try:          
             cur=self.run_query(con,prepared_sql,data_tpl)
  
@@ -92,24 +95,28 @@ class astm_file_xl1000(astm_file):
           sample_id_list=each_sample[0].split(self.s3)[1].split(self.s2)
           print_to_log('sample_id_list:',sample_id_list)
 
-          for sample_id in sample_id_list:
-            sample_id_for_order=sample_id.rstrip(' ')
-            if(sample_id.rstrip(' ').isnumeric() == False):
-              print_to_log('sample_id is not number:',sample_id)
+          for query_sample_id in sample_id_list:
+            query_sample_id=query_sample_id.rstrip(' ')
+            #####Unique ID code
+            if(query_sample_id.isnumeric() == True):
+              real_sample_id=query_sample_id
+            else:
+              print_to_log('query_sample_id is not number:',query_sample_id)
               ##Now find sample id for it
-              unique_id=sample_id.rstrip(' ')
-              returned_sample_id=self.find_sample_id_for_unique_id(con,sample_id)
-              print_to_log('sample_id={}'.format(returned_sample_id),'unique_id={}'.format(unique_id))
-              if(sample_id!=False):
-                sample_id=str(returned_sample_id)
+              real_sample_id=self.find_sample_id_for_unique_id(con,query_sample_id)
+              print_to_log('real_sample_id={}'.format(real_sample_id),'query_sample_id={}'.format(query_sample_id))
+              if(real_sample_id!=False):
+                real_sample_id=str(real_sample_id)
+                print_to_log('real_sample_id after converting to string is: ', real_sample_id)
               else:
-                continue;   
-            print_to_log('final str(sample_id)=',sample_id)
-            sample_id_for_order=unique_id
+                print_to_log('skipping order generation, because, No real_sample_id  is found.for unique ID=', query_sample_id)
+                continue;
+              print_to_log('final real sample id as str =',real_sample_id)
             #get examination codes
+            
             print_to_log('Q tuple:',each_record)
             print_to_log('Q prepared_sql:',prepared_sql_q)
-            data_tpl=(sample_id,self.equipment)
+            data_tpl=(real_sample_id,self.equipment)
             print_to_log('Q data tuple:',data_tpl)
             try: 
               cur=self.run_query(con,prepared_sql_q,data_tpl)
@@ -127,13 +134,13 @@ class astm_file_xl1000(astm_file):
             self.close_cursor(cur)
             
             print_to_log(
-                        'Sample ID {}:'.format(sample_id),
+                        'real_sample_id {}: query_sample_id {}:'.format(real_sample_id,query_sample_id),
                         'Following is requested {}:'.format(requested_examination_code)
                         )
                         
             #order_to_send=self.make_order(sample_id,requested_examination_code)
             #This changes were made to accoumodate unique id
-            order_to_send=self.make_order(sample_id_for_order,requested_examination_code)
+            order_to_send=self.make_order(query_sample_id,requested_examination_code)
             print_to_log('Order ready',order_to_send)
             fname=self.get_outbox_filename()
             print_to_log('file to be written',fname)
@@ -332,7 +339,10 @@ class astm_file_xl1000(astm_file):
         cur_for_finding_sample_id=self.run_query(con,prepared_sql_for_finding_sample_id,data_tpl_for_finding_sample_id)
         data_for_finding_sample_id=self.get_single_row(cur_for_finding_sample_id)
         logging.debug('sample id related data found is: {}'.format(data_for_finding_sample_id))
-        return data_for_finding_sample_id[0]
+        if(data_for_finding_sample_id != None):
+          return data_for_finding_sample_id[0]
+        else:
+          return False
       data=self.get_single_row(cur)
     return False
 
