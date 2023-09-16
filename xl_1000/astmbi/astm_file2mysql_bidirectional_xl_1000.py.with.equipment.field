@@ -40,7 +40,6 @@ class astm_file_xl1000(astm_file):
         if(each_record[0]=='R'):
           query_sample_id=each_sample[0].rstrip(' ')
           print_to_log('query_sample_id',query_sample_id)
-          
           #####Unique ID code
           if(query_sample_id.isnumeric() == True):
             real_sample_id=query_sample_id
@@ -56,14 +55,12 @@ class astm_file_xl1000(astm_file):
               print_to_log('skipping order generation, because, No real_sample_id  is found.for unique ID=', query_sample_id)
               continue;
             print_to_log('final real sample id as str =',real_sample_id)
-           #####End of Unique ID code 
-            
           #get examination codes
           print_to_log('R tuple:',each_record)
           ex_code=each_record[2].split(self.s3)[3]
           ex_result=each_record[3]          
           uniq=each_record[12]+'|'+conf.equipment
-          examination_id=self.get_eid_for_sid_code(con,real_sample_id,ex_code)
+          examination_id=self.get_eid_for_sid_code(con,sample_id,ex_code)
           if(examination_id==False):
             msg="Skipping the while loop once"
             print_to_log(msg,' .. because no eid for this sid and this code')
