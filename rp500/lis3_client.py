@@ -71,7 +71,7 @@ def signal_handler(signal, frame):
 ack_msg=STX+ACK+ETX+get_checksum(STX+ACK+ETX)+EOT
 
 HOST = lis3_conf.host_address  # The server's hostname or IP address
-PORT = lis3_conf.host_port        # The port used by the server
+PORT = lis3_conf.host_port     # The port used by the server
 
 logging.basicConfig(filename=lis3_conf.lis3_log_filename,level=logging.DEBUG,format='%(asctime)s : %(message)s')
 signal.signal(signal.SIGALRM, signal_handler)

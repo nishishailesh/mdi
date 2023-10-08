@@ -12,7 +12,11 @@ import io
 from astm_bidirectional_common import my_sql , file_mgmt, print_to_log
 #For mysql password
 sys.path.append('/var/gmcs_config')
-import astm_var
+
+#########Change this if database/password/username changes##########
+import astm_var_clg as astm_var
+#########Change this if database/password/username changes##########
+
 ####Settings section start#####
 logfile_name='/var/log/tosoh.out.log'
 inbox_data='/root/tosoh.inbox.data/' #remember ending/

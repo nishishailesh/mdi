@@ -19,8 +19,6 @@ model_string=b'0500'
 # if there is # in front, that line will be ignored
 serial_string=b'53878'
 
-serial_string=b'53878'
-
 
 
 

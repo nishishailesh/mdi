@@ -13,7 +13,7 @@ from lis3_client_common import file_mgmt, print_to_log, my_sql
 import lis3_conf
 #For mysql password
 sys.path.append('/var/gmcs_config')
-import astm_var
+import astm_var_clg as astm_var
 
 def get_checksum(data):
   checksum=0
