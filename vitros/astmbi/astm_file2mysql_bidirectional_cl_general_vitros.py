@@ -185,7 +185,7 @@ class astm_file_xl1000(astm_file):
                         
             #order_to_send=self.make_order(sample_id,requested_examination_code)
             #This changes were made to accoumodate unique id
-            order_to_send=self.make_order(query_sample_id,requested_examination_code)
+            order_to_send=self.make_order(query_sample_id,real_sample_id,requested_examination_code)
             print_to_log('Order ready',order_to_send)
             fname=self.get_outbox_filename()
             print_to_log('file to be written',fname)
@@ -196,7 +196,7 @@ class astm_file_xl1000(astm_file):
           
     self.close_link(con)
 
-  def make_order(self,sample_id,requested_examination_code):
+  def make_order(self,query_sample_id,real_sample_id,requested_examination_code):
     #for Vitros
     #^^^1.0000+002+1.0 ^^^manualDil+testcode+autodilu~testcode+autodilu~testcode+autodilu
     three_caret=self.s3*3
@@ -227,11 +227,11 @@ class astm_file_xl1000(astm_file):
     return final_message
     '''
 
-    vitros_sample_code=self.get_sample_type_vitros_code(sample_id).encode()
+    vitros_sample_code=self.get_sample_type_vitros_code(real_sample_id).encode()
     header_line=  b'1H'+self.s1.encode()+self.s2.encode()+self.s3.encode()+self.s4.encode()+b'|||3600796||||||||LIS2-A|'+time_now.encode()
     patient_line= b'2P|1|NOPID|||NONAME^^|||F'
     #order_line=   b'3O|1|'+sample_id.encode()+b'||'+ex_code_str+b'|R||'+time_now.encode()+b'||||N||||5||||||||||O'
-    order_line=   b'3O|1|'+sample_id.encode()+b'||'+ex_code_str+b'|R||'+time_now.encode()+b'||||N||||'+vitros_sample_code+b'||||||||||O'
+    order_line=   b'3O|1|'+query_sample_id.encode()+b'||'+ex_code_str+b'|R||'+time_now.encode()+b'||||N||||'+vitros_sample_code+b'||||||||||O'
     terminator_line=b'4L|1|N'
     return self.format_astm_message(header_line)+self.format_astm_message(patient_line)+self.format_astm_message(order_line)+self.format_astm_message(terminator_line)
 
