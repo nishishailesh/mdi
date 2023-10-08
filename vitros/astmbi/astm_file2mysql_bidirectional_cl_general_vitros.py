@@ -13,7 +13,11 @@ from astm_file2mysql_bidirectional_general import astm_file
 
 #For mysql password
 sys.path.append('/var/gmcs_config')
-import astm_var
+
+###########Setup this for getting database,user,pass##########
+import astm_var_clg as astm_var
+##############################################################
+
 
 #classes#################################
 class astm_file_xl1000(astm_file):
@@ -60,13 +64,38 @@ class astm_file_xl1000(astm_file):
         if(each_record[0]=='R'):
  
           #sample_id^tray^cup (Vitros)
-          sample_id=each_sample[0].split(self.s3)[0]
-          print_to_log('sample_id',sample_id)
+          #sample_id=each_sample[0].split(self.s3)[0]
+          #print_to_log('sample_id',sample_id)
 
-          if(sample_id.rstrip(' ').isnumeric() == False):
-            print_to_log('sample_id is not number:',sample_id)
-            return False;
-                  
+          #if(sample_id.rstrip(' ').isnumeric() == False):
+          #  print_to_log('sample_id is not number:',sample_id)
+          #  return False;
+          
+          #sample_id^tray^cup (Vitros)
+          query_sample_id=each_sample[0].split(self.s3)[0].rstrip(' ')
+          print_to_log('query_sample_id',query_sample_id)
+
+          #####Unique ID code
+          if(query_sample_id.isnumeric() == True):
+            real_sample_id=query_sample_id
+          else:
+            print_to_log('query_sample_id is not number:',query_sample_id)
+            ##Now find sample id for it
+            real_sample_id=self.find_sample_id_for_unique_id(con,query_sample_id)
+            print_to_log('real_sample_id={}'.format(real_sample_id),'query_sample_id={}'.format(query_sample_id))
+            if(real_sample_id!=False):
+              real_sample_id=str(real_sample_id)
+              print_to_log('real_sample_id after converting to string is: ', real_sample_id)
+            else:
+              print_to_log('skipping order generation, because, No real_sample_id  is found.for unique ID=', query_sample_id)
+              continue;
+            print_to_log('final real sample id as str =',real_sample_id)
+           #####End of Unique ID code 
+
+
+
+          #########Ending sample_id/unique id finding############
+          #########Starting analysis############
           print_to_log('R tuple:',each_record)
           #^^^1.0000+002+1.0 ^^^manualDil+testcode+autodilu
           ex_code=each_record[2].split(self.s3)[3].split('+')[1]
@@ -74,7 +103,7 @@ class astm_file_xl1000(astm_file):
           
           #uniq=each_record[12]
           uniq='{}|{}'.format(each_record[12],conf.equipment)
-          examination_id=self.get_eid_for_sid_code(con,sample_id,ex_code)
+          examination_id=self.get_eid_for_sid_code(con,real_sample_id,ex_code)
           if(examination_id==False):
             msg="Skipping the while loop once"
             print_to_log(msg,' .. because no eid for this sid and this code')
@@ -82,9 +111,9 @@ class astm_file_xl1000(astm_file):
           msg='{}={}'.format(examination_id,ex_result)
           print_to_log('examination_id={}'.format(examination_id),'ex_result={}'.format(ex_result))
           
-          data_tpl=(sample_id,examination_id,ex_result,uniq,ex_result)
-          
-          try:          
+          data_tpl=(real_sample_id,examination_id,ex_result,uniq,ex_result)
+
+          try:
             cur=self.run_query(con,prepared_sql,data_tpl)
  
             msg=prepared_sql
@@ -110,15 +139,29 @@ class astm_file_xl1000(astm_file):
           sample_id_list=each_sample[0].split(self.s3)[1].split(self.s2)
           print_to_log('sample_id_list:',sample_id_list)
 
-          for sample_id in sample_id_list:
-            if(sample_id.rstrip(' ').isnumeric() == False):
-              print_to_log('sample_id is not number:',sample_id)
-              continue;
-            
+          for query_sample_id in sample_id_list:
+            query_sample_id=query_sample_id.rstrip(' ')
+            #####Unique ID code
+            if(query_sample_id.isnumeric() == True):
+              real_sample_id=query_sample_id
+            else:
+              print_to_log('query_sample_id is not number:',query_sample_id)
+              ##Now find sample id for it
+              real_sample_id=self.find_sample_id_for_unique_id(con,query_sample_id)
+              print_to_log('real_sample_id={}'.format(real_sample_id),'query_sample_id={}'.format(query_sample_id))
+              if(real_sample_id!=False):
+                real_sample_id=str(real_sample_id)
+                print_to_log('real_sample_id after converting to string is: ', real_sample_id)
+              else:
+                print_to_log('skipping order generation, because, No real_sample_id  is found.for unique ID=', query_sample_id)
+                continue;
+              print_to_log('final real sample id as str =',real_sample_id)
+
+
             #get examination codes
             print_to_log('Q tuple:',each_record)
             print_to_log('Q prepared_sql:',prepared_sql_q)
-            data_tpl=(sample_id,self.equipment)
+            data_tpl=(real_sample_id,self.equipment)
             print_to_log('Q data tuple:',data_tpl)
             try:
               cur=self.run_query(con,prepared_sql_q,data_tpl)
@@ -136,11 +179,13 @@ class astm_file_xl1000(astm_file):
             self.close_cursor(cur)
             
             print_to_log(
-                        'Sample ID {}:'.format(sample_id),
+                        'real_sample_id {}: query_sample_id {}:'.format(real_sample_id,query_sample_id),
                         'Following is requested {}:'.format(requested_examination_code)
                         )
                         
-            order_to_send=self.make_order(sample_id,requested_examination_code)
+            #order_to_send=self.make_order(sample_id,requested_examination_code)
+            #This changes were made to accoumodate unique id
+            order_to_send=self.make_order(query_sample_id,requested_examination_code)
             print_to_log('Order ready',order_to_send)
             fname=self.get_outbox_filename()
             print_to_log('file to be written',fname)
@@ -220,8 +265,6 @@ class astm_file_xl1000(astm_file):
     two_digit_checksum_string='{:X}'.format(checksum).zfill(2)
     return two_digit_checksum_string.encode()
   
-  
-      
   def get_eid_for_sid_code(self,con,sid,ex_code):
     logging.debug(sid)
     prepared_sql='select examination_id from result where sample_id=%s'
@@ -261,6 +304,52 @@ class astm_file_xl1000(astm_file):
       logging.debug(msg)
       return False
     return ex_id[0]
+
+  def find_sample_id_for_unique_id(self,con,uid):
+    logging.debug('find_sample_id_for_unique_id(self,con,uid): sample id is not number. but,unique id provided is {}'.format(uid))
+    
+    prepared_sql='select \
+                        examination_id, \
+                        json_extract(edit_specification,\'$.unique_prefix\') as unique_prefix, \
+                        json_extract(edit_specification,\'$.table\') as id_table \
+                    from examination \
+                    where \
+                        json_extract(edit_specification,\'$.type\')="id_single_sample"';
+    
+    logging.debug('find_sample_id_for_unique_id(self,con,uid): prepared_sql is:\n {}'.format(prepared_sql))
+    cur=self.run_query(con,prepared_sql,())
+    logging.debug("one data:{}".format(cur))
+    data=self.get_single_row(cur)
+    while data:
+      logging.debug("one data:{}".format(data))
+      striped_data=(data[0],data[1].lstrip('"').rstrip('"'),data[2].lstrip('"').rstrip('"'))
+      logging.debug("one striped data:{}".format(striped_data))
+      logging.debug("unique prefix length data in uid is : {} ?=? {} : is unique _prefix is".format(uid[0:len(striped_data[1])],striped_data[1]))
+      if(uid[0:len(striped_data[1])]==striped_data[1]):
+        #logging.debug(">>>>search table={} , search id is={}".format(striped_data[2], uid[len(striped_data[1]):] ))
+        table_name=striped_data[2]
+        unique_id=uid[len(striped_data[1]):]
+        logging.debug(">>>>search table={} , search id is={}".format(table_name,unique_id))
+        prepared_sql_for_finding_sample_id="select sample_id from `"+table_name+"` where id=%s";
+        logging.debug("prepared_sql_for_finding_sample_id = {}".format(prepared_sql_for_finding_sample_id))
+        
+        data_tpl_for_finding_sample_id=(unique_id,)          # (), (123,) are valid tuple. BUT, (,) (123) are not valid. see type(tpl) at python prompt
+        logging.debug("data_tpl_for_finding_sample_id = {}".format(data_tpl_for_finding_sample_id))
+        
+        cur_for_finding_sample_id=self.run_query(con,prepared_sql_for_finding_sample_id,data_tpl_for_finding_sample_id)
+        data_for_finding_sample_id=self.get_single_row(cur_for_finding_sample_id)
+        logging.debug('sample id related data found is: {}'.format(data_for_finding_sample_id))
+        if(data_for_finding_sample_id != None):
+          return data_for_finding_sample_id[0]
+        else:
+          return False
+      data=self.get_single_row(cur)
+    return False
+
+
+
+
+
 
 def print_to_log(object1,object2):
   logging.debug('{} {}'.format(object1,object2))

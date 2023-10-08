@@ -27,13 +27,12 @@ class astm_file_xl1000(astm_file):
                              (%s,%s,%s,%s) \
                              ON DUPLICATE KEY UPDATE result=%s'
 
-
     prepared_sql_q='select r.sample_id,r.examination_id, h.code from result r,host_code h \
                       where \
                         r.sample_id=%s and \
                         r.examination_id=h.examination_id and \
                         h.equipment=%s'
-                      
+
     for each_sample in self.final_data:
 
       for each_record in each_sample[1]:
@@ -115,6 +114,8 @@ class astm_file_xl1000(astm_file):
                 print_to_log('skipping order generation, because, No real_sample_id  is found.for unique ID=', query_sample_id)
                 continue;
               print_to_log('final real sample id as str =',real_sample_id)
+              
+              
             #get examination codes
             
             print_to_log('Q tuple:',each_record)
@@ -348,6 +349,7 @@ class astm_file_xl1000(astm_file):
           return False
       data=self.get_single_row(cur)
     return False
+
 
 def print_to_log(object1,object2):
   logging.debug('{} {}'.format(object1,object2))
