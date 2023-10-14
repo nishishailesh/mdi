@@ -4,7 +4,7 @@ After=multi-user.target
 
 [Service]
 Type=simple
-ExecStart=/root/mdi/vitros/astmbi/astm_file2mysql_bidirectional_cl_general_vitros.py
+ExecStart=/root/mdi/xl_1000/astmbi/astm_file2mysql_bidirectional_xl_1000.py
 
 [Install]
 WantedBy=multi-user.target

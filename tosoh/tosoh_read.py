@@ -3,6 +3,8 @@ import sys
 import fcntl
 
 ####Settings section start#####
+#input_tty='/dev/pts/4'
+#socat -d -d pty,rawer,echo=0 pty,rawer,echo=0 #to create virtual com port for testing
 input_tty='/dev/ttyS2'
 logfile_name='/var/log/tosoh.in.log'
 output_folder='/root/tosoh.inbox.data/' #remember ending/

@@ -4,7 +4,7 @@ After=multi-user.target
 
 [Service]
 Type=simple
-ExecStart=/root/tosoh/tosoh_read.py
+ExecStart=/root/mdi/tosoh/tosoh_read.py
 
 [Install]
 WantedBy=multi-user.target

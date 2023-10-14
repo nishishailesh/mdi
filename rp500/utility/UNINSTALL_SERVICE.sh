@@ -1,5 +1,5 @@
 #!/bin/sh
 systemctl daemon-reload
-systemctl enable vitros_read
-systemctl enable vitros_write
+systemctl disable rp500_read
+systemctl disable rp500_write
 #rename services and edit lines above

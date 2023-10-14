@@ -4,7 +4,7 @@ After=multi-user.target
 
 [Service]
 Type=simple
-ExecStart=/root/rp500/lis3_client.py
+ExecStart=/root/mdi/rp500/lis3_client.py
 
 [Install]
 WantedBy=multi-user.target
