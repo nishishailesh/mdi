@@ -1,0 +1,9 @@
+[Unit]
+Description=Read+Write data from VItros3600 to/from inbox/outbox using ASTM Protocol
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/root/mdi/r90/astmbi/astm_bidirectional_general_for_r90.py
+[Install]
+WantedBy=multi-user.target
