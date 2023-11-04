@@ -49,20 +49,24 @@ class astm_file_xl1000(astm_file):
       # For QC
       #('O', '1', '', 'QC #^3', '', '', '', '', '', '', 'ANONYMOUS', '', '', '148^05', '', 'QCLevel^S7430')
       #  0    1    2     3       4   5   6   7   8   9     10        11  12     13     14     15     
+      
       uniq=''   #Radiometer have datetime in only first R record, so this is nessesary for other R records
       for each_record in each_sample[1]:
         if(each_record[0]=='O'):
-          self.query_patient_id=each_record[3].split(self.s3)[1].rstrip(' ')
-          print_to_log('sometimes sample_id is not possible (e.g QC sample)','So trying to find next ASTM order field which is patient_id')
-          print_to_log('query_patient_id:',self.query_patient_id)
+          #keep query_instrument_specimen_id ready, in case sample_id is not available
+          self.query_instrument_specimen_id=each_record[3].split(self.s3)[1].rstrip(' ')
+          print_to_log('sometimes sample_id is not possible (e.g QC sample)','So trying to find next ASTM order field which is Instrument Specimen ID')
+          print_to_log('query_instrument_specimen_id:',self.query_instrument_specimen_id)
           # now try to get_sample_id_for_patient_id()
-          
         if(each_record[0]=='R'):
           query_sample_id=each_sample[0].split(self.s3)[0].rstrip(' ')
           print_to_log('query_sample_id',query_sample_id)
-
+          if(query_sample_id==''):
+            real_sample_id=self.get_real_sample_id_for_instrument_specimen_id(con,self.query_instrument_specimen_id)
+            if(real_sample_id==False):
+              continue        #sample_id empty and nothing found for specimen_id
           #####Unique ID code
-          if(query_sample_id.isnumeric() == True):
+          elif(query_sample_id.isnumeric() == True):
             real_sample_id=query_sample_id
             print_to_log('sample_id is number, so, final real sample id (same as query_sample_id) =',real_sample_id)
           else:
@@ -74,8 +78,8 @@ class astm_file_xl1000(astm_file):
               real_sample_id=str(real_sample_id)
               print_to_log('real_sample_id after converting to string is: ', real_sample_id)
             else:
-              print_to_log('skipping order generation, because, No real_sample_id  is found.for unique ID=', query_sample_id)
-              continue;
+              print_to_log('skipping record processing, because, No real_sample_id  is found.for unique ID=', query_sample_id)
+              continue
             print_to_log('final real sample id as str =',real_sample_id)
            #####End of Unique ID code 
 
@@ -86,14 +90,16 @@ class astm_file_xl1000(astm_file):
           print_to_log('R tuple:',each_record)
           #('R', '1', '^^^pH^M', '7.39', '', '', 'N', '', 'F', '', 'ANONYMOUS', '20231103173828', '20231103173828')
           #  0    1       2        3      4   5   6    7   8    9    10          11(only with 1st R)     12
-          #                                                                        start time         complate time
+          #('R', '1', '^^^T^',    '25','Cel', '', '', '', 'F', '', 'ANONYMOUS', '20231103120712')
+          #                                                                        start time(used) complate time
+
           ex_code=each_record[2].split(self.s3)[3]
           ex_result=each_record[3]
           
           #uniq=each_record[12]
           #uniq is time + model + serial (multiple equipment of same model in single network, especially for QC results)
-          if(len(each_record)>=13):
-            uniq='{}|{}|{}'.format(each_record[12],conf.equipment,conf.serial)
+          if(len(each_record)>=12):
+            uniq='{}|{}|{}'.format(each_record[11],conf.equipment,conf.serial)
           else:
             print_to_log('current R have no datetime so old uniq used -> ',uniq)
             uniq=uniq
@@ -191,6 +197,36 @@ class astm_file_xl1000(astm_file):
             print_to_log('file written to outbox .. ',' .. and closed')
         '''  
     self.close_link(con)
+
+
+  def get_real_sample_id_for_instrument_specimen_id(self,con,isd):
+    logging.debug('trying to find real_sample_id for instrument speciment id:{}'.format(isd))
+    prepared_sql='select eq.sample_id,eq.result,sr.result,num.result \
+                      from result eq, result sr, result num \
+                      where \
+                      eq.sample_id=sr.sample_id and\
+                      eq.sample_id=num.sample_id and\
+                      eq.examination_id=%s and \
+                      sr.examination_id=%s and \
+                      num.examination_id=%s and \
+                      num.result=%s'
+    data_tpl=(conf.equipment_examination_id,conf.equipment_serial_number_examination_id,conf.equipment_specimen_number_examination_id,isd)
+    logging.debug('prepared sql: {}'.format(prepared_sql))
+    logging.debug('data_tpl: {}'.format(data_tpl))
+    cur=self.run_query(con,prepared_sql,data_tpl)
+    
+    sid_tpl=()
+    data=self.get_single_row(cur)
+    while data:
+      logging.debug('record found:{}'.format(data))
+      sid_tpl=sid_tpl+(data[0],)
+      data=self.get_single_row(cur)
+    logging.debug('tuple of sample_id found:{}'.format(sid_tpl))
+    if(len(sid_tpl)!=1):
+      msg="Number of sample_id for data_tpl={} is {}. only 1 is acceptable.".format(data_tpl,len(sid_tpl))
+      logging.debug(msg)
+      return False
+    return sid_tpl[0]
 
   def make_order(self,query_sample_id,real_sample_id,requested_examination_code):
     #for Vitros

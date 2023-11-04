@@ -14,5 +14,12 @@ inbox_data='/root/r90.inbox.data/'
 inbox_arch='/root/r90.inbox.arch/'
 outbox_data='/root/r90.outbox.data/'
 outbox_arch='/root/r90.outbox.arch/'
+
+#following is used to search hostcode and create uniq string for primary results
 equipment='R9-402016'
+#following is used for to create uniq string for primary results
 serial='402016'
+#following is used to find equipment
+equipment_examination_id=9000
+equipment_serial_number_examination_id=9001
+equipment_specimen_number_examination_id=9002
