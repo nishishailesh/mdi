@@ -1,4 +1,4 @@
-	#!/usr/bin/python3
+#!/usr/bin/python3
 lis3_log_filename='/var/log/rp500_read.log'
 lis3_file2mysql_log_filename='/var/log/rp500_write.log'
 #if you wish to be specific

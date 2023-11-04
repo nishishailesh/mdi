@@ -1,0 +1,4 @@
+mkdir /root/rp500K.inbox.data/
+mkdir /root/rp500K.inbox.arch/
+mkdir /root/rp500K.outbox.data/
+mkdir /root/rp500K.outbox.arch/
