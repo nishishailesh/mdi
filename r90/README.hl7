@@ -1,0 +1,3 @@
+This script can read Radiometer ABL90 data in HL7 format, too.
+Actually, ABL90 have incomplate MLLP format (start and end is same as ASTM data)
+However no script is yet written to handle HL7 data for sending it to database. 
