@@ -1,0 +1,4 @@
+mkdir /root/quikread.inbox.data/
+mkdir /root/quikread.inbox.arch/
+mkdir /root/quikread.outbox.data/
+mkdir /root/quikread.outbox.arch/

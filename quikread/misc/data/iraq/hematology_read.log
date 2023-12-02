@@ -1,0 +1,285 @@
+2023-11-24 11:58:49,292 : <socket.socket fd=4, family=2, type=1, proto=0, laddr=('0.0.0.0', 2578)> select() is waiting..
+2023-11-24 12:02:30,647 : <socket.socket fd=4, family=2, type=1, proto=0, laddr=('0.0.0.0', 2578)> select() detected activity
+2023-11-24 12:02:30,648 : <socket.socket fd=4, family=2, type=1, proto=0, laddr=('0.0.0.0', 2578)> Connection request is read
+2023-11-24 12:02:30,648 : Listening to [5, 4] , [] , [5, 4]  Heard from for [5] , [] , [] 
+2023-11-24 12:02:30,648 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56652)> Conn have sent some data. now using recv() and manage_read()
+2023-11-24 12:02:30,648 : Following is received: b'\x0bMSH|^~\\&|BM850|||||20231124195431|ORU^R01|BM_1|P|2.7||||||UNICODE UTF-8\rSFT|Boule Medical AB|r28074 branches/rel-2.3.9|M|r28074 branches/rel-2.3.9\rOBR|1||15888|ali mohammed||||||||||||||||||202311241729\rNTE|1||""\rOBX|1|ST|ID2||""||||||P\rOBX|2|ST|PROF||Blood||||||P\rOBX|3|ST|METH||OT||||||P\rOBX|4|ST|OPID||""||||||P\rOBX|5|NM|RBC||4.10|10*12/L|3.50-5.50|""|||P\rOBX|6|NM|MCV||80.2|fL|75.0-100.0|""|||P\rOBX|7|NM|HCT||32.9|%|35.0-55.0|""|||P\rOBX|8|NM|MCH||27.6|pg|25.0-35.0|""|||P\rOBX|9|NM|MCHC||34.4|g/dL|31.0-38.0|""|||P\rOBX|10|NM|RDWR||10.6|%|11.0-16.0|""|||P\rOBX|11|NM|RDWA||55.9|fL|0.1-250.0|""|||P\rOBX|12|NM|PLT||421|10*9/L|150-450|""|||P\rOBX|13|NM|MPV||9.3|fL|6.5-11.0|""|||P\rOBX|14|NM|PCT||0.39|%|0.01-9.99|""|||P\rOBX|15|NM|PDW||13.4|fL|0.1-30.0|""|||P\rOBX|16|NM|PDWR||49.2|%|0.1-99.9|""|||P\rOBX|17|NM|P-LCR||25.1|%|0.1-99.9|""|||P\rOBX|18|NM|P-LCC||105|10*9/L|1-1999|""|||P\rOBX|19|NM|HGB||11.3|g/dL|11.5-16.5|""|||P\rOBX|20|NM|WBC||19.0|10*9/L|4.0-10.0|""|||P\rOBX|21|NM|LYMA||1.9|10*9/L|0.9-5.0|""|||P\rOBX|22|NM|MIDA||0.6'
+2023-11-24 12:02:31,649 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [5] , [5] , [] 
+2023-11-24 12:02:31,649 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56652)> conn is writable. using manage_write()
+2023-11-24 12:02:31,649 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:02:31,649 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56652)> Conn have sent some data. now using recv() and manage_read()
+2023-11-24 12:02:31,649 : Following is received: b'|10*9/L|0.1-1.5|""|||P\rOBX|23|NM|GRNA||16.5|10*9/L|1.2-8.0|""|||P\rOBX|24|NM|LYMR||10.1|%|15.0-50.0|""|||P\rOBX|25|NM|MIDR||3.6|%|2.0-15.0|""|||P\rOBX|26|NM|GRNR||86.3|%|35.0-80.0|""|||P\r\x1c\r'
+2023-11-24 12:02:32,650 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:02:32,650 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56652)> conn is writable. using manage_write()
+2023-11-24 12:02:32,650 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:02:33,651 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:02:33,651 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56652)> conn is writable. using manage_write()
+2023-11-24 12:02:33,651 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:02:34,652 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:02:34,652 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56652)> conn is writable. using manage_write()
+2023-11-24 12:02:34,652 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:02:35,653 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:02:35,653 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56652)> conn is writable. using manage_write()
+2023-11-24 12:02:35,653 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:02:36,654 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:02:36,654 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56652)> conn is writable. using manage_write()
+2023-11-24 12:02:36,654 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:02:37,654 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:02:37,655 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56652)> conn is writable. using manage_write()
+2023-11-24 12:02:37,655 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:02:38,655 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:02:38,656 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56652)> conn is writable. using manage_write()
+2023-11-24 12:02:38,656 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:02:39,656 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:02:39,657 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56652)> conn is writable. using manage_write()
+2023-11-24 12:02:39,657 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:02:40,657 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:02:40,658 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56652)> conn is writable. using manage_write()
+2023-11-24 12:02:40,658 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:02:41,658 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:02:41,659 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56652)> conn is writable. using manage_write()
+2023-11-24 12:02:41,659 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:02:42,659 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [5, 4] , [5] , [] 
+2023-11-24 12:02:42,660 : <socket.socket fd=4, family=2, type=1, proto=0, laddr=('0.0.0.0', 2578)> Connection request is read, This is second connection. We do not want it. shutdown, close
+2023-11-24 12:02:42,660 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56652)> conn is writable. using manage_write()
+2023-11-24 12:02:42,660 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:02:42,660 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56652)> Conn have sent some data. now using recv() and manage_read()
+2023-11-24 12:02:42,660 : Following is received: b''
+2023-11-24 12:02:42,661 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56652)> Conn have closed, accepting new connection
+2023-11-24 12:02:42,661 : Connection from client closed?? [Errno 107] Transport endpoint is not connected
+2023-11-24 12:05:13,204 : <socket.socket fd=4, family=2, type=1, proto=0, laddr=('0.0.0.0', 2578)> New Connection request is read
+2023-11-24 12:05:14,205 : Listening to [6, 4] , [6] , [6, 4]  Heard from for [6] , [6] , [] 
+2023-11-24 12:05:14,205 : <socket.socket fd=6, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56654)> conn is writable. using manage_write()
+2023-11-24 12:05:14,205 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:05:14,205 : <socket.socket fd=6, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56654)> Conn have sent some data. now using recv() and manage_read()
+2023-11-24 12:05:14,206 : Following is received: b'\x0bMSH|^~\\&|BM850|||||20231124195714|ORU^R01|BM_3|P|2.7||||||UNICODE UTF-8\rSFT|Boule Medical AB|r28074 branches/rel-2.3.9|M|r28074 branches/rel-2.3.9\rOBR|1||15885|sajad taha||||||||||||||||||202311231743\rNTE|1||""\rOBX|1|ST|ID2||""||||||P\rOBX|2|ST|PROF||Blood||||||P\rOBX|3|ST|METH||MC||||||P\rOBX|4|ST|OPID||""||||||P\rOBX|5|NM|RBC||4.48|10*12/L|3.50-5.50|""|||P\rOBX|6|NM|MCV||81.6|fL|75.0-100.0|""|||P\rOBX|7|NM|HCT||36.5|%|35.0-55.0|""|||P\rOBX|8|NM|MCH||27.4|pg|25.0-35.0|""|||P\rOBX|9|NM|MCHC||33.5|g/dL|31.0-38.0|""|||P\rOBX|10|NM|RDWR||9.9|%|11.0-16.0|""|||P\rOBX|11|NM|RDWA||54.7|fL|0.1-250.0|""|||P\rOBX|12|NM|PLT||563|10*9/L|150-450|""|||P\rOBX|13|NM|MPV||7.9|fL|6.5-11.0|""|||P\rOBX|14|NM|PCT||0.44|%|0.01-9.99|""|||P\rOBX|15|NM|PDW||11.0|fL|0.1-30.0|""|||P\rOBX|16|NM|PDWR||43.8|%|0.1-99.9|""|||P\rOBX|17|NM|P-LCR||14.7|%|0.1-99.9|""|||P\rOBX|18|NM|P-LCC||82|10*9/L|1-1999|""|||P\rOBX|19|NM|HGB||12.2|g/dL|11.5-16.5|""|||P\rOBX|20|NM|WBC||11.8|10*9/L|4.0-10.0|""|||P\rOBX|21|NM|LYMA||4.0|10*9/L|0.9-5.0|""|||P\rOBX|22|NM|MIDA||0.7|10*'
+2023-11-24 12:05:15,206 : Listening to [6, 4] , [6] , [6, 4]  Heard from for [6] , [6] , [] 
+2023-11-24 12:05:15,206 : <socket.socket fd=6, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56654)> conn is writable. using manage_write()
+2023-11-24 12:05:15,207 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:05:15,207 : <socket.socket fd=6, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56654)> Conn have sent some data. now using recv() and manage_read()
+2023-11-24 12:05:15,207 : Following is received: b'9/L|0.1-1.5|""|||P\rOBX|23|NM|GRNA||7.1|10*9/L|1.2-8.0|""|||P\rOBX|24|NM|LYMR||34.2|%|15.0-50.0|""|||P\rOBX|25|NM|MIDR||6.6|%|2.0-15.0|""|||P\rOBX|26|NM|GRNR||59.2|%|35.0-80.0|""|||P\r\x1c\r'
+2023-11-24 12:05:16,207 : Listening to [6, 4] , [6] , [6, 4]  Heard from for [] , [6] , [] 
+2023-11-24 12:05:16,208 : <socket.socket fd=6, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56654)> conn is writable. using manage_write()
+2023-11-24 12:05:16,208 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:05:17,208 : Listening to [6, 4] , [6] , [6, 4]  Heard from for [] , [6] , [] 
+2023-11-24 12:05:17,209 : <socket.socket fd=6, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56654)> conn is writable. using manage_write()
+2023-11-24 12:05:17,209 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:05:18,209 : Listening to [6, 4] , [6] , [6, 4]  Heard from for [] , [6] , [] 
+2023-11-24 12:05:18,209 : <socket.socket fd=6, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56654)> conn is writable. using manage_write()
+2023-11-24 12:05:18,209 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:05:19,210 : Listening to [6, 4] , [6] , [6, 4]  Heard from for [] , [6] , [] 
+2023-11-24 12:05:19,210 : <socket.socket fd=6, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56654)> conn is writable. using manage_write()
+2023-11-24 12:05:19,210 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:05:20,211 : Listening to [6, 4] , [6] , [6, 4]  Heard from for [] , [6] , [] 
+2023-11-24 12:05:20,211 : <socket.socket fd=6, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56654)> conn is writable. using manage_write()
+2023-11-24 12:05:20,211 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:05:21,212 : Listening to [6, 4] , [6] , [6, 4]  Heard from for [] , [6] , [] 
+2023-11-24 12:05:21,212 : <socket.socket fd=6, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56654)> conn is writable. using manage_write()
+2023-11-24 12:05:21,212 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:05:22,213 : Listening to [6, 4] , [6] , [6, 4]  Heard from for [] , [6] , [] 
+2023-11-24 12:05:22,213 : <socket.socket fd=6, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56654)> conn is writable. using manage_write()
+2023-11-24 12:05:22,213 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:05:23,214 : Listening to [6, 4] , [6] , [6, 4]  Heard from for [] , [6] , [] 
+2023-11-24 12:05:23,214 : <socket.socket fd=6, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56654)> conn is writable. using manage_write()
+2023-11-24 12:05:23,214 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:05:24,214 : Listening to [6, 4] , [6] , [6, 4]  Heard from for [] , [6] , [] 
+2023-11-24 12:05:24,215 : <socket.socket fd=6, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56654)> conn is writable. using manage_write()
+2023-11-24 12:05:24,215 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:05:25,215 : Listening to [6, 4] , [6] , [6, 4]  Heard from for [] , [6] , [] 
+2023-11-24 12:05:25,216 : <socket.socket fd=6, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56654)> conn is writable. using manage_write()
+2023-11-24 12:05:25,216 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:05:26,216 : Listening to [6, 4] , [6] , [6, 4]  Heard from for [] , [6] , [] 
+2023-11-24 12:05:26,217 : <socket.socket fd=6, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56654)> conn is writable. using manage_write()
+2023-11-24 12:05:26,217 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:05:27,217 : Listening to [6, 4] , [6] , [6, 4]  Heard from for [6, 4] , [6] , [] 
+2023-11-24 12:05:27,218 : <socket.socket fd=4, family=2, type=1, proto=0, laddr=('0.0.0.0', 2578)> Connection request is read, This is second connection. We do not want it. shutdown, close
+2023-11-24 12:05:27,218 : <socket.socket fd=6, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56654)> conn is writable. using manage_write()
+2023-11-24 12:05:27,218 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:05:27,218 : <socket.socket fd=6, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56654)> Conn have sent some data. now using recv() and manage_read()
+2023-11-24 12:05:27,218 : Following is received: b''
+2023-11-24 12:05:27,218 : <socket.socket fd=6, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578)> Conn have closed, accepting new connection
+2023-11-24 12:05:27,219 : Connection from client closed?? [Errno 107] Transport endpoint is not connected
+2023-11-24 12:05:45,698 : <socket.socket fd=4, family=2, type=1, proto=0, laddr=('0.0.0.0', 2578)> New Connection request is read
+2023-11-24 12:05:46,698 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [5] , [5] , [] 
+2023-11-24 12:05:46,698 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56656)> conn is writable. using manage_write()
+2023-11-24 12:05:46,699 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:05:46,699 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56656)> Conn have sent some data. now using recv() and manage_read()
+2023-11-24 12:05:46,699 : Following is received: b'\x0bMSH|^~\\&|BM850|||||20231124195746|ORU^R01|BM_5|P|2.7||||||UNICODE UTF-8\rSFT|Boule Medical AB|r28074 branches/rel-2.3.9|M|r28074 branches/rel-2.3.9\rOBR|1||15882|HASHEM   AHMED||||||||||||||||||202311222104\rNTE|1||""\rOBX|1|ST|ID2||""||||||P\rOBX|2|ST|PROF||Blood||||||P\rOBX|3|ST|METH||MC||||||P\rOBX|4|ST|OPID||""||||||P\rOBX|5|NM|RBC||5.65|10*12/L|3.50-5.50|""|||P\rOBX|6|NM|MCV||82.5|fL|75.0-100.0|""|||P\rOBX|7|NM|HCT||46.6|%|35.0-55.0|""|||P\rOBX|8|NM|MCH||25.8|pg|25.0-35.0|""|||P\rOBX|9|NM|MCHC||31.3|g/dL|31.0-38.0|""|||P\rOBX|10|NM|RDWR||10.1|%|11.0-16.0|""|||P\rOBX|11|NM|RDWA||56.5|fL|0.1-250.0|""|||P\rOBX|12|NM|PLT||273|10*9/L|150-450|""|||P\rOBX|13|NM|MPV||8.4|fL|6.5-11.0|""|||P\rOBX|14|NM|PCT||0.23|%|0.01-9.99|""|||P\rOBX|15|NM|PDW||11.9|fL|0.1-30.0|""|||P\rOBX|16|NM|PDWR||47.8|%|0.1-99.9|""|||P\rOBX|17|NM|P-LCR||19.4|%|0.1-99.9|""|||P\rOBX|18|NM|P-LCC||53|10*9/L|1-1999|""|||P\rOBX|19|NM|HGB||14.6|g/dL|11.5-16.5|""|||P\rOBX|20|NM|WBC||14.9|10*9/L|4.0-10.0|""|||P\rOBX|21|NM|LYMA||8.4|10*9/L|0.9-5.0|""|||P\rOBX|22|NM|MIDA||1.'
+2023-11-24 12:05:47,699 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [5] , [5] , [] 
+2023-11-24 12:05:47,700 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56656)> conn is writable. using manage_write()
+2023-11-24 12:05:47,700 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:05:47,700 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56656)> Conn have sent some data. now using recv() and manage_read()
+2023-11-24 12:05:47,700 : Following is received: b'3|10*9/L|0.1-1.5|""|||P\rOBX|23|NM|GRNA||5.2|10*9/L|1.2-8.0|""|||P\rOBX|24|NM|LYMR||55.9|%|15.0-50.0|""|||P\rOBX|25|NM|MIDR||9.1|%|2.0-15.0|""|||P\rOBX|26|NM|GRNR||35.0|%|35.0-80.0|""|||P\r\x1c\r'
+2023-11-24 12:05:48,700 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:05:48,701 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56656)> conn is writable. using manage_write()
+2023-11-24 12:05:48,701 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:05:49,701 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:05:49,701 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56656)> conn is writable. using manage_write()
+2023-11-24 12:05:49,702 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:05:50,702 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:05:50,702 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56656)> conn is writable. using manage_write()
+2023-11-24 12:05:50,702 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:05:51,703 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:05:51,703 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56656)> conn is writable. using manage_write()
+2023-11-24 12:05:51,703 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:05:52,704 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:05:52,704 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56656)> conn is writable. using manage_write()
+2023-11-24 12:05:52,704 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:05:53,704 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:05:53,705 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56656)> conn is writable. using manage_write()
+2023-11-24 12:05:53,705 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:05:54,705 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:05:54,705 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56656)> conn is writable. using manage_write()
+2023-11-24 12:05:54,706 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:05:55,706 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:05:55,706 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56656)> conn is writable. using manage_write()
+2023-11-24 12:05:55,707 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:05:56,707 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:05:56,707 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56656)> conn is writable. using manage_write()
+2023-11-24 12:05:56,707 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:05:57,708 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:05:57,708 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56656)> conn is writable. using manage_write()
+2023-11-24 12:05:57,708 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:05:58,708 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:05:58,709 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56656)> conn is writable. using manage_write()
+2023-11-24 12:05:58,709 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:05:59,709 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:05:59,709 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56656)> conn is writable. using manage_write()
+2023-11-24 12:05:59,711 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:06:00,711 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:06:00,711 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56656)> conn is writable. using manage_write()
+2023-11-24 12:06:00,712 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:06:01,712 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:06:01,712 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56656)> conn is writable. using manage_write()
+2023-11-24 12:06:01,712 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:06:02,713 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:06:02,713 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56656)> conn is writable. using manage_write()
+2023-11-24 12:06:02,713 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:06:03,714 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:06:03,714 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56656)> conn is writable. using manage_write()
+2023-11-24 12:06:03,714 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:06:04,714 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:06:04,715 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56656)> conn is writable. using manage_write()
+2023-11-24 12:06:04,716 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:06:05,717 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:06:05,717 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56656)> conn is writable. using manage_write()
+2023-11-24 12:06:05,717 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:06:06,717 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:06:06,718 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56656)> conn is writable. using manage_write()
+2023-11-24 12:06:06,718 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:06:07,718 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:06:07,719 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56656)> conn is writable. using manage_write()
+2023-11-24 12:06:07,719 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:06:08,719 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:06:08,719 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56656)> conn is writable. using manage_write()
+2023-11-24 12:06:08,719 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:06:09,720 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:06:09,720 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56656)> conn is writable. using manage_write()
+2023-11-24 12:06:09,722 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:06:10,722 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:06:10,723 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56656)> conn is writable. using manage_write()
+2023-11-24 12:06:10,723 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:06:11,723 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:06:11,723 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56656)> conn is writable. using manage_write()
+2023-11-24 12:06:11,724 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:06:12,724 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:06:12,724 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56656)> conn is writable. using manage_write()
+2023-11-24 12:06:12,724 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:06:35,052 : <socket.socket fd=4, family=2, type=1, proto=0, laddr=('0.0.0.0', 2578)> select() is waiting..
+2023-11-24 12:07:45,309 : <socket.socket fd=4, family=2, type=1, proto=0, laddr=('0.0.0.0', 2578)> select() detected activity
+2023-11-24 12:07:45,309 : <socket.socket fd=4, family=2, type=1, proto=0, laddr=('0.0.0.0', 2578)> Connection request is read
+2023-11-24 12:07:45,310 : Listening to [5, 4] , [] , [5, 4]  Heard from for [5] , [] , [] 
+2023-11-24 12:07:45,310 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56657)> Conn have sent some data. now using recv() and manage_read()
+2023-11-24 12:07:45,310 : Following is received: b'\x0bMSH|^~\\&|BM850|||||20231124195946|ORU^R01|BM_6|P|2.7||||||UNICODE UTF-8\rSFT|Boule Medical AB|r28074 branches/rel-2.3.9|M|r28074 branches/rel-2.3.9\rOBR|1||15882|HASHEM   AHMED||||||||||||||||||202311222104\rNTE|1||""\rOBX|1|ST|ID2||""||||||P\rOBX|2|ST|PROF||Blood||||||P\rOBX|3|ST|METH||MC||||||P\rOBX|4|ST|OPID||""||||||P\rOBX|5|NM|RBC||5.65|10*12/L|3.50-5.50|""|||P\rOBX|6|NM|MCV||82.5|fL|75.0-100.0|""|||P\rOBX|7|NM|HCT||46.6|%|35.0-55.0|""|||P\rOBX|8|NM|MCH||25.8|pg|25.0-35.0|""|||P\rOBX|9|NM|MCHC||31.3|g/dL|31.0-38.0|""|||P\rOBX|10|NM|RDWR||10.1|%|11.0-16.0|""|||P\rOBX|11|NM|RDWA||56.5|fL|0.1-250.0|""|||P\rOBX|12|NM|PLT||273|10*9/L|150-450|""|||P\rOBX|13|NM|MPV||8.4|fL|6.5-11.0|""|||P\rOBX|14|NM|PCT||0.23|%|0.01-9.99|""|||P\rOBX|15|NM|PDW||11.9|fL|0.1-30.0|""|||P\rOBX|16|NM|PDWR||47.8|%|0.1-99.9|""|||P\rOBX|17|NM|P-LCR||19.4|%|0.1-99.9|""|||P\rOBX|18|NM|P-LCC||53|10*9/L|1-1999|""|||P\rOBX|19|NM|HGB||14.6|g/dL|11.5-16.5|""|||P\rOBX|20|NM|WBC||14.9|10*9/L|4.0-10.0|""|||P\rOBX|21|NM|LYMA||8.4|10*9/L|0.9-5.0|""|||P\rOBX|22|NM|MIDA||1.3|10*9/L|0.1-1.5|""|||P\rOBX|23|NM|GRNA||5.2|10*9/L|1.2-8.0|""|||P\rOBX|24|NM|LYMR||55.9|%|15.0-50.0|""|||P\rOBX|25|NM|MIDR||9.1|%|2.0-15.0|""|||P\rOBX|26|NM|GRNR||35.0|%|35.0-80.0|""|||P\r\x1c\r'
+2023-11-24 12:07:46,310 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:07:46,311 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56657)> conn is writable. using manage_write()
+2023-11-24 12:07:46,311 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:07:47,311 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:07:47,312 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56657)> conn is writable. using manage_write()
+2023-11-24 12:07:47,312 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:07:48,312 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:07:48,312 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56657)> conn is writable. using manage_write()
+2023-11-24 12:07:48,313 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:07:49,313 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:07:49,313 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56657)> conn is writable. using manage_write()
+2023-11-24 12:07:49,313 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:07:50,314 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:07:50,314 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56657)> conn is writable. using manage_write()
+2023-11-24 12:07:50,314 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:07:51,314 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:07:51,315 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56657)> conn is writable. using manage_write()
+2023-11-24 12:07:51,315 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:07:52,315 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:07:52,315 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56657)> conn is writable. using manage_write()
+2023-11-24 12:07:52,315 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:07:53,316 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:07:53,316 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56657)> conn is writable. using manage_write()
+2023-11-24 12:07:53,316 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:07:54,317 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:07:54,317 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56657)> conn is writable. using manage_write()
+2023-11-24 12:07:54,317 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:07:55,317 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:07:55,318 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56657)> conn is writable. using manage_write()
+2023-11-24 12:07:55,318 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:07:56,318 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:07:56,318 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56657)> conn is writable. using manage_write()
+2023-11-24 12:07:56,318 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:07:57,319 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:07:57,319 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56657)> conn is writable. using manage_write()
+2023-11-24 12:07:57,319 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:07:58,319 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:07:58,320 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56657)> conn is writable. using manage_write()
+2023-11-24 12:07:58,320 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:07:59,320 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:07:59,320 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56657)> conn is writable. using manage_write()
+2023-11-24 12:07:59,320 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:08:00,321 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [5, 4] , [5] , [] 
+2023-11-24 12:08:00,321 : <socket.socket fd=4, family=2, type=1, proto=0, laddr=('0.0.0.0', 2578)> Connection request is read, This is second connection. We do not want it. shutdown, close
+2023-11-24 12:08:00,321 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56657)> conn is writable. using manage_write()
+2023-11-24 12:08:00,321 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:08:00,322 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56657)> Conn have sent some data. now using recv() and manage_read()
+2023-11-24 12:08:00,322 : Following is received: b''
+2023-11-24 12:08:00,322 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56657)> Conn have closed, accepting new connection
+2023-11-24 12:08:24,699 : <socket.socket fd=4, family=2, type=1, proto=0, laddr=('0.0.0.0', 2578)> New Connection request is read
+2023-11-24 12:08:25,699 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [5] , [5] , [] 
+2023-11-24 12:08:25,699 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56659)> conn is writable. using manage_write()
+2023-11-24 12:08:25,699 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:08:25,699 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56659)> Conn have sent some data. now using recv() and manage_read()
+2023-11-24 12:08:25,700 : Following is received: b'\x0bMSH|^~\\&|BM850|||||20231124200025|ORU^R01|BM_8|P|2.7||||||UNICODE UTF-8\rSFT|Boule Medical AB|r28074 branches/rel-2.3.9|M|r28074 branches/rel-2.3.9\rOBR|1||15879|ABD ALAH   MEZHER||||||||||||||||||202311212043\rNTE|1||""\rOBX|1|ST|ID2||""||||||P\rOBX|2|ST|PROF||Blood||||||P\rOBX|3|ST|METH||MC||||||P\rOBX|4|ST|OPID||""||||||P\rOBX|5|NM|RBC||5.20|10*12/L|3.50-5.50|""|||P\rOBX|6|NM|MCV||70.8|fL|75.0-100.0|""|||P\rOBX|7|NM|HCT||36.8|%|35.0-55.0|""|||P\rOBX|8|NM|MCH||22.6|pg|25.0-35.0|""|||P\rOBX|9|NM|MCHC||31.8|g/dL|31.0-38.0|""|||P\rOBX|10|NM|RDWR||11.1|%|11.0-16.0|""|||P\rOBX|11|NM|RDWA||49.2|fL|0.1-250.0|""|||P\rOBX|12|NM|PLT||216|10*9/L|150-450|""|||P\rOBX|13|NM|MPV||8.0|fL|6.5-11.0|""|||P\rOBX|14|NM|PCT||0.17|%|0.01-9.99|""|||P\rOBX|15|NM|PDW||11.3|fL|0.1-30.0|""|||P\rOBX|16|NM|PDWR||44.6|%|0.1-99.9|""|||P\rOBX|17|NM|P-LCR||17.0|%|0.1-99.9|""|||P\rOBX|18|NM|P-LCC||36|10*9/L|1-1999|""|||P\rOBX|19|NM|HGB||11.7|g/dL|11.5-16.5|""|||P\rOBX|20|NM|WBC||7.6|10*9/L|4.0-10.0|""|||P\rOBX|21|NM|LYMA||5.7|10*9/L|0.9-5.0|""|||P\rOBX|22|NM|MIDA||0.3|10*9/L|0.1-1.5|""|||P\rOBX|23|NM|GRNA||1.6|10*9/L|1.2-8.0|""|||P\rOBX|24|NM|LYMR||73.8|%|15.0-50.0|""|||P\rOBX|25|NM|MIDR||4.6|%|2.0-15.0|""|||P\rOBX|26|NM|GRNR||21.6|%|35.0-80.0|""|||P\r\x1c\r'
+2023-11-24 12:08:26,700 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:08:26,700 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56659)> conn is writable. using manage_write()
+2023-11-24 12:08:26,700 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:08:27,701 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:08:27,701 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56659)> conn is writable. using manage_write()
+2023-11-24 12:08:27,701 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:08:28,702 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:08:28,702 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56659)> conn is writable. using manage_write()
+2023-11-24 12:08:28,702 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:08:29,702 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:08:29,703 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56659)> conn is writable. using manage_write()
+2023-11-24 12:08:29,703 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:08:30,703 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:08:30,703 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56659)> conn is writable. using manage_write()
+2023-11-24 12:08:30,703 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:08:31,704 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:08:31,704 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56659)> conn is writable. using manage_write()
+2023-11-24 12:08:31,704 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:08:32,705 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:08:32,705 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56659)> conn is writable. using manage_write()
+2023-11-24 12:08:32,705 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:08:33,705 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:08:33,706 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56659)> conn is writable. using manage_write()
+2023-11-24 12:08:33,706 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:08:34,706 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:08:34,707 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56659)> conn is writable. using manage_write()
+2023-11-24 12:08:34,707 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:08:35,707 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [] , [5] , [] 
+2023-11-24 12:08:35,707 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56659)> conn is writable. using manage_write()
+2023-11-24 12:08:35,708 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:08:36,708 : Listening to [5, 4] , [5] , [5, 4]  Heard from for [5, 4] , [5] , [] 
+2023-11-24 12:08:36,708 : <socket.socket fd=4, family=2, type=1, proto=0, laddr=('0.0.0.0', 2578)> Connection request is read, This is second connection. We do not want it. shutdown, close
+2023-11-24 12:08:36,708 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56659)> conn is writable. using manage_write()
+2023-11-24 12:08:36,708 : Following will be sent b'Demo initiate_write() override me. send apple, pineapple \n'
+2023-11-24 12:08:36,709 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56659)> Conn have sent some data. now using recv() and manage_read()
+2023-11-24 12:08:36,709 : Following is received: b''
+2023-11-24 12:08:36,709 : <socket.socket fd=5, family=2, type=1, proto=0, laddr=('192.168.0.109', 2578), raddr=('192.168.0.113', 56659)> Conn have closed, accepting new connection
