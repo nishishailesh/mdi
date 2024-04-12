@@ -1,0 +1,31 @@
+.:
+total 10228
+-rw-r--r-- 1 root root      110 Aug 26 01:14 bidirectional_general_conf.py
+-rw-r--r-- 1 root root 10355186 Aug 26 01:14 bidirectional_general.log
+-rwxr-xr-x 1 root root     9112 Aug 26 01:14 bidirectional_general.py
+-rwxr-xr-x 1 root root     9113 Aug 26 01:14 bidirectional_general.py.best.original
+-rw-r--r-- 1 root root     9474 Aug 26 01:14 bidirectional_general.py.old
+-rw-r--r-- 1 root root        0 Aug 26 01:15 file.details
+-rw-r--r-- 1 root root     2434 Aug 26 01:14 file_management_lis.py
+-rwxr-xr-x 1 root root     2178 Aug 26 01:14 hl7_client.py
+-rwxr-xr-x 1 root root     5984 Aug 26 01:14 hl7_general.py
+-rw-r--r-- 1 root root    35149 Aug 26 01:14 LICENSE
+-rw-r--r-- 1 root root      223 Aug 26 01:14 mk_msg.py
+-rw-r--r-- 1 root root      708 Aug 26 01:14 mysql_lis.py
+-rw-r--r-- 1 root root       33 Aug 26 01:14 README.md
+-rwxr-xr-x 1 root root      109 Aug 26 01:14 update_hl7_general.sh
+drwxr-xr-x 3 root root     4096 Aug 26 01:14 utility
+
+utility:
+total 14432
+-rw-r--r-- 1 root root      293 Aug 26 01:14 config4hl7clientjava
+-rwxr-xr-x 1 root root      159 Aug 26 01:14 COPY_SERVICE.sh
+drwxr-xr-x 2 root root     4096 Aug 26 01:14 hapi-testpanel-2.0.1
+-rw-r--r-- 1 root root 14706478 Aug 26 01:14 hapi-testpanel-2.0.1-linux.tar.bz2
+-rwxr-xr-x 1 root root      248 Aug 26 01:14 hl7_general_read.service
+-rwxr-xr-x 1 root root      230 Aug 26 01:14 hl7_general_write.service
+-rw-r--r-- 1 root root     4729 Aug 26 01:14 hl7.help.txt
+-rwxr-xr-x 1 root root      142 Aug 26 01:14 INSTALL_SERVICE.sh
+-rwxr-xr-x 1 root root      146 Aug 26 01:14 mk_folders
+-rw-r--r-- 1 root root    24579 Aug 26 01:14 mllp_transport_specification.PDF
+-rwxr-xr-x 1 root root      166 Aug 26 01:14 reset_everything.sh

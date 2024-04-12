@@ -1,0 +1,10 @@
+[Unit]
+Description=excahnge data between ASTM-complient-equipment and inbox/outbox using ASTM Protocol
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/root/mdi/bs600m/hl7/hl7_general.py
+
+[Install]
+WantedBy=multi-user.target

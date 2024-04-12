@@ -1,0 +1,12 @@
+#!/usr/bin/python3
+log_filename='/var/log/bs600m_hl7_inbox.log'
+outbox_log_filename='/var/log/bs600m_hl7_outbox.log'
+host_address=''
+host_port='7118'
+select_timeout=1
+alarm_time=10
+inbox_data='/root/bs600m.inbox.data/'
+inbox_arch='/root/bs600m.inbox.arch/'
+outbox_data='/root/bs600m.outbox.data/'
+outbox_arch='/root/bs600m.outbox.arch/'
+equipment='BS600M'

@@ -1,0 +1,4 @@
+mkdir /root/hl7_general.inbox.data/
+mkdir /root/hl7_general.inbox.arch/
+mkdir /root/hl7_general.outbox.data/
+mkdir /root/hl7_general.outbox.arch/

@@ -1,0 +1,9 @@
+%HL7 Comm%
+{Simple Controller}
+logLevel=DEBUG
+controllerName=Custom controller
+[Logic|org.nule.integrateclient.samples.SlowdownLogicAgent]
+timeToSleep=1000
+[In:0|org.nule.integrateclient.net.MllpThreadServer]
+listenPort=2575
+acknowledgmentAgent=org.nule.integrateclient.net.MllpAcknowledgment

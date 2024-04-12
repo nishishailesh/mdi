@@ -1,0 +1,5 @@
+2023-12-13 21:37:33,463 : Alarm..response NOT received in stipulated time , data receving/sending may be incomplate
+2023-12-13 21:49:24,665 : Alarm Stopped. Signal:14 Frame:<frame at 0x7f9c3e544d50, file '/root/mdi/mllp/./hl7_client.py', line 13, code read_input>
+2023-12-13 21:49:24,666 : Alarm..response NOT received in stipulated time , data receving/sending may be incomplate
+2023-12-13 22:15:53,012 : Alarm Stopped. Signal:14 Frame:<frame at 0x7f9c3e544ca0, file '/root/mdi/mllp/./hl7_client.py', line 13, code read_input>
+2023-12-13 22:15:53,012 : Alarm..response NOT received in stipulated time , data receving/sending may be incomplate

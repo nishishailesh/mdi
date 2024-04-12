@@ -1,0 +1,116 @@
+==============================
+MSH
+=============================
+
+Field 	Length 	Data Type 	Optionality 	Repeatability 	Table 	
+MSH.1 - Field Separator	1	ST	R 	-		
+MSH.2 - Encoding Characters	5	ST	R 	-		
+MSH.3 - Sending Application	0	HD	O 	-	0361	
+MSH.4 - Sending Facility	0	HD	O 	-	0362	
+MSH.5 - Receiving Application	0	HD	O 	-	0361	
+MSH.6 - Receiving Facility	0	HD	O 	-	0362	
+MSH.7 - Date/Time Of Message	0	DTM	R 	-		
+MSH.8 - Security	0	ST	O 	-		
+MSH.9 - Message Type	0	MSG	R 	-		
+MSH.10 - Message Control Id	199	ST	R 	-		
+MSH.11 - Processing Id	0	PT	R 	-		
+MSH.12 - Version Id	0	VID	R 	-		
+MSH.13 - Sequence Number	0	NM	O 	-		
+MSH.14 - Continuation Pointer	0	ST	O 	-		
+MSH.15 - Accept Acknowledgment Type	2	ID	O 	-	0155	
+MSH.16 - Application Acknowledgment Type	2	ID	O 	-	0155	
+MSH.17 - Country Code	3	ID	O 	-	0399	
+MSH.18 - Character Set	15	ID	O 	∞	0211	
+MSH.19 - Principal Language Of Message	0	CWE	O 	-		
+MSH.20 - Alternate Character Set Handling Scheme	13	ID	O 	-	0356	
+MSH.21 - Message Profile Identifier	0	EI	O 	∞		
+MSH.22 - Sending Responsible Organization	0	XON	O 	-		
+MSH.23 - Receiving Responsible Organization	0	XON	O 	-		
+MSH.24 - Sending Network Address	0	HD	O 	-		
+MSH.25 - Receiving Network Address	0	HD	O 	-		
+Privacy Policy | Terms of Use | Lisence Terms
+Copyright © 2009-2022 Caristix. All rights reserved.HL7®, FHIR® and the FHIR are the registered trademarks of Health Level Seven International and their use does not constitute en
+
+SEQ			LEN				DT				OPT				RP/#	ELEMENT NAME
+1				1				  ST				R				 				Field Separator
+2				4				  ST				R				 				Encoding Characters
+3				180				HD				O				 				Sending Application
+4				180				HD				O				 				Sending Facility
+5				180				HD				O				 				Receiving Application
+6				180				HD				O				 				Receiving Facility
+7				26				TS				O				 				Date/Time of Message
+8				40				ST				O				 				Security
+9				7				  CM_MSG		R				 				Message Type
+10			20				ST				R				 				Message Control Id
+11			3				  PT				R				 				Processing Id
+12			8				  ID				R				 				Version Id
+13			15				NM				O				 				Sequence Number
+14			180				ST				O				 				Continuation Pointer
+15			2				  ID				O				 				Accept Acknowledgement Type
+16			2				  ID				O				 				Application Acknowledgement Type
+17			2				  ID				O				 				Country Code
+18			6				  ID				O				 				Character Set
+19			3				  CE				O				 				Principal Language of Message
+
+R=Required
+O=optional
+
+
+
+MSA.1 - Acknowledgment Code	2	ID	R 	-	0008	
+MSA.2 - Message Control Id	199	ST	R 	-		
+MSA.3 - Text Message	0	ST	W 	-		
+MSA.4 - Expected Sequence Number	0	NM	O 	-		
+MSA.5 - Delayed Acknowledgment Type	0	ST	W 	-		
+MSA.6 - Error Condition	0	ST	W 	-		
+MSA.7 - Message Waiting Number	0	NM	O 	-		
+MSA.8 - Message Waiting Priority	1	ID	O 	-	0520	
+
+==========================================
+MSA segment:
+==========================================
+Indicates whether the message was accepted (ie. processed successfully) or rejected. The first field of the MSA segment contains the acknowledge status, which is one of the following:
+Acknowledge Status
+	
+Meaning
+AA 	
+
+Positive acknowledgment: the message was successfully processed.
+AE 	
+
+Application error: there is a problem processing the message. The sending application must correct the problem before attempting to resend the message.
+
+AR
+	
+
+Application reject: there is a problem with field 9, field 11 or field 12 of the MSH segment of the incoming message, or there is a problem with the receiving application that is not related to the message or its structure.
+
+
+AA	Original mode: Application Accept - Enhanced mode: Application acknowledgment: Accept	
+AE	Original mode: Application Error - Enhanced mode: Application acknowledgment: Error	
+AR	Original mode: Application Reject - Enhanced mode: Application acknowledgment: Reject	
+CA	Enhanced mode: Accept acknowledgment: Commit Accept	
+CE	Enhanced mode: Accept acknowledgment: Commit Error	
+CR	Enhanced mode: Accept acknowledgment: Commit Reject
+
+
+
+ack message
+Control
+The simple general acknowledgment (ACK) can be used where the application does not define a special application level acknowledgment message or where there has been an error that precludes application processing.  It is also used for accept level acknowledgments.  The details are described in Section 2.13.1, “Original and enhanced processing rules.”
+
+
+
+Note: For the general acknowledgment (ACK) message, the value of MSH-9-2-Trigger event is equal to the value of MSH-9-2-Trigger event in the query message being acknowledged.  The value of MSH-9-3-Message structure for the general acknowledgment message is always ACK.
+Segment
+Optionality
+Repeatability
+MSH  - Message Header
+R
+-
+MSA  - Message Acknowledgment
+R
+-
+ERR  - Error
+O
+-

@@ -1,0 +1,4 @@
+mkdir /root/bs600m.inbox.data/
+mkdir /root/bs600m.inbox.arch/
+mkdir /root/bs600m.outbox.data/
+mkdir /root/bs600m.outbox.arch/
