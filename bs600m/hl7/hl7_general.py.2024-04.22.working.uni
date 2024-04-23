@@ -7,7 +7,7 @@ from file_management_lis import file_management_lis
 
 def print_to_log(object1,object2):
   logging.debug('{} {}'.format(object1,object2))
-
+    
 class hl7(bdg):
   def __init__(self,host_address,host_port,select_timeout,alarm_time):
     super().__init__(host_address,host_port,select_timeout)
@@ -20,30 +20,30 @@ class hl7(bdg):
     #Possible message status
     #START_BYTE_RECEIVED
     #END_BYTE_RECEIVED
-
+    
     signal.signal(signal.SIGALRM, self.signal_handler)
 
   def manage_read(self,data):
     self.print_to_log('self.hl7_message_status: on entry',self.hl7_message_status)
     self.print_to_log("hl7::manage_read()  data chunk :",data)
-
+    
     if(chr(data[0]).encode()==self.mllp_start_byte):
       signal.alarm(0)
       self.print_to_log('Stopping: alarm','')
       self.raw_data=data
-      self.hl7_message_status='START_BYTE_RECEIVED'
+      self.hl7_message_status='START_BYTE_RECEIVED'    
       self.print_to_log('self.hl7_message_status:',self.hl7_message_status)
       signal.alarm(self.alarm_time) #if en bytes not received in alarm_time, staus will become EMPTY and raw_data will be b''
       self.print_to_log('Starting alarm for seconds:',self.alarm_time)
 
     else:
-      if(self.hl7_message_status=='START_BYTE_RECEIVED'):
+      if(self.hl7_message_status=='START_BYTE_RECEIVED'):    
         self.raw_data=self.raw_data+data
-
+     
     if(chr(data[-1]).encode()==self.mllp_newline and chr(data[-2]).encode()==self.mllp_end_byte):
       signal.alarm(0) # alarm not needed
       self.print_to_log('Stopping: alarm','')
-      self.print_to_log("end bytes received. hl7::manage_read() full frame :",self.raw_data)
+      self.print_to_log("end bytes received. hl7::manage_read() full frame :",self.raw_data)  
       message_tuple=self.raw_data_to_message_tuple()
       self.respond_to_message(message_tuple)
       self.raw_data=b''
@@ -51,27 +51,27 @@ class hl7(bdg):
       self.print_to_log('self.hl7_message_status:',self.hl7_message_status)
 
   def manage_write(self):
-    self.print_to_log('bdg::loop->hl7::manage_write():',' This is from hl7 class')
+    self.print_to_log('bdg::loop->hl7::manage_write():',' This is from hl7 class')           
     #Send message in response to write_set->select->writable initiated by manage_read() and initiate_write()
     if(len(self.write_msg)>0):
-      self.print_to_log('hl7::manage_write():Following will be sent',self.write_msg)
+      self.print_to_log('hl7::manage_write():Following will be sent',self.write_msg) 
       try:
         self.conn[0].send(self.write_msg)
         if(self.hl7_message_status=='INITIATE_WRITE'):
-          self.hl7_message_status!='EMPTY'
+          self.hl7_message_status!='EMPTY'  
           #'INITIATE_WRITE' is reset
-        self.write_msg=b'' #not in astm. because status
+        self.write_msg=b'' #not in astm. because status 
       except Exception as my_ex :
         self.print_to_log("Disconnection from client?",my_ex)
     else:
-      self.print_to_log('hl7::manage_write()',' No data to write')
+      self.print_to_log('hl7::manage_write()',' No data to write') 
 
   def initiate_write(self):
-    self.print_to_log('hl7::initiate_write()',' For managing outbox')
+    self.print_to_log('hl7::initiate_write()',' For managing outbox') 
     self.print_to_log('hl7::initiate_write() self.hl7_message_status:',self.hl7_message_status)
     if(self.hl7_message_status!='EMPTY'):
       self.print_to_log('Some activity is going on somewhere else','may be a message is being received. So, doing nothing')
-      return
+      return 
     else:
       self.print_to_log('hl7::initiate_write()  previous hl7_message_status:',self.hl7_message_status)
       self.hl7_message_status!='INITIATE_WRITE'
@@ -145,7 +145,7 @@ class hl7(bdg):
     if(message_tuple[0][8]==b'QRY^Q02'):
       self.write_msg=b"\x0bMSH|^~\&|||||"+msg_time+b"||"+ack_msg_type[message_tuple[0][8]]+b"|"+msg_control_id+b"|P|2.3.1\x0dMSA|AA|"+received_msg_id+b"|message accepted|||0\x0dQAK|SR|OK\x0d\x1c\x0d"
     if(message_tuple[0][8]==b'ORU^R01'):
-      self.write_msg=b"\x0bMSH|^~\&|||||"+msg_time+b"||"+ack_msg_type[message_tuple[0][8]]+b"|"+msg_control_id+b"|P|2.3.1||||0||UNICODE||\x0dMSA|AA|"+received_msg_id+b"|message accepted|||0\x0d\x1c\x0d"
+      self.write_msg=b"\x0bMSH|^~\&|||||"+msg_time+b"||"+ack_msg_type[message_tuple[0][8]]+b"|"+msg_control_id+b"|P|2.3.1\x0dMSA|AA|"+received_msg_id+b"|message accepted|||0\x0d\x1c\x0d"
 
 
     fml=file_management_lis(conf.inbox_data,conf.inbox_arch,conf.outbox_data,conf.outbox_arch)
@@ -154,8 +154,8 @@ class hl7(bdg):
     fcntl.flock(self.fd, fcntl.LOCK_EX | fcntl.LOCK_NB)   #lock file
     #Now use this fd for writing
     self.fd.write(self.raw_data)
-    print_to_log('File Name:',new_file)
-    print_to_log('File Content written:',self.raw_data)
+    print_to_log('File Name:',new_file)    
+    print_to_log('File Content written:',self.raw_data)    
     self.fd.close()
   #not yet used in current script
   def is_received_data_MLLP(self,data):

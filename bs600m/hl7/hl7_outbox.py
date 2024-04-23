@@ -37,7 +37,7 @@ def file_to_message_tuple(fml):
 
 def manage_result(tpl):
   print_to_log("manage_result() data",tpl)
-  ex_result_dict={}
+  ex_result_tuple=()
   query_sample_id=b''
   for one_line in tpl:
     if(one_line[0]==b'OBR'):
@@ -67,7 +67,7 @@ def manage_result(tpl):
         eid=get_eid_for_sid_code(con,real_sample_id,one_line[3].decode("UTF-8"))
         if(eid is not False):
           uniq='{}|{}'.format(one_line[14].decode("UTF-8"),conf.equipment)
-          ex_result_dict[eid]=(one_line[5].decode("UTF-8"),uniq)
+          ex_result_tuple=ex_result_tuple+(  (eid , one_line[5].decode("UTF-8"),uniq), )
         else:
           print_to_log("examination id not found for code=",one_line[3])
           print_to_log("Is examination requested?","Is examination in host_code?")
@@ -75,14 +75,14 @@ def manage_result(tpl):
 
   print_to_log("query_sample_id (for machine barcode) is ",query_sample_id)
   print_to_log("real_sample_id is ",real_sample_id)
-  print_to_log("results are: ",ex_result_dict)
+  print_to_log("results are: ",ex_result_tuple)
   prepared_sql='insert into primary_result \
                              (sample_id,examination_id,result,uniq) \
                              values \
                              (%s,%s,%s,%s) \
                              ON DUPLICATE KEY UPDATE result=%s'
-  for one_ex in ex_result_dict:
-    data_tpl=(real_sample_id,one_ex,ex_result_dict[one_ex][0],ex_result_dict[one_ex][1],ex_result_dict[one_ex][0])
+  for one_ex in ex_result_tuple:
+    data_tpl=(real_sample_id, one_ex[0],one_ex[1] ,one_ex[2],one_ex[1])
     try:
       cur=mysql_db.run_query(con,prepared_sql,data_tpl)
       msg=prepared_sql
@@ -186,7 +186,7 @@ def make_dsr(source_msg_control_id,query_sample_id,ex_tuple):
   #msg_control_id=dt.strftime("%Y%m%d%H%M%S%f")
   #msg_control_id=dt.strftime("%Y%m%d%H%M%S")
   msg_control_id=str(round(1000+random.random()*1000))
-  MSH='MSH|^~\&|||||'+msg_time+'||DSR^Q03|'+msg_control_id+'|P|2.3.1||||||UNICODE|||'
+  MSH='MSH|^~\&|||||'+msg_time+'||DSR^Q03|'+msg_control_id+'|P|2.3.1||||||ASCII|||'
   MSA='MSA|AA|'+source_msg_control_id+'|Message accepted|||0|'
   ERR='ERR|0|'
   QAK='QAK|SR|OK|'
