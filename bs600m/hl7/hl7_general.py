@@ -131,7 +131,7 @@ class hl7(bdg):
         self.hl7_message_status='EMPTY'
         self.print_to_log('As ACK self.hl7_message_status:',self.hl7_message_status)
         self.print_to_log("Alarm was started when initiate_write updated write message",' Now as ACK is obtained, so, alarm is closed')
-        signal.alarm(0) # this was alarm started during initiate write        
+        signal.alarm(0) # this was alarm started during initiate write
         return  #no more action
 
     dt=datetime.datetime.now()
@@ -143,10 +143,13 @@ class hl7(bdg):
     #when lis send DSR^Q03 message, analyser respnds by ACK^R03 message
 
     if(message_tuple[0][8]==b'QRY^Q02'):
-      self.write_msg=b"\x0bMSH|^~\&|||||"+msg_time+b"||"+ack_msg_type[message_tuple[0][8]]+b"|"+msg_control_id+b"|P|2.3.1\x0dMSA|AA|"+received_msg_id+b"|message accepted|||0\x0dQAK|SR|OK\x0d\x1c\x0d"
+      #self.write_msg=b"\x0bMSH|^~\&|||||"+msg_time+b"||"+ack_msg_type[message_tuple[0][8]]+b"|"+msg_control_id+b"|P|2.3.1\x0dMSA|AA|"+received_msg_id+b"|message accepted|||0\x0dQAK|SR|OK\x0d\x1c\x0d"
+      #self.write_msg=b"\x0bMSH|^~\&|||||"+msg_time+b"||"+ack_msg_type[message_tuple[0][8]]+b"|"+received_msg_id+b"|P|2.3.1\x0dMSA|AA|"+received_msg_id+b"|message accepted|||0\x0dQAK|SR|OK\x0d\x1c\x0d"
+      self.write_msg=b"\x0bMSH|^~\&|||||"+msg_time+b"||"+ack_msg_type[message_tuple[0][8]]+b"|"+received_msg_id+b"|P|2.3.1||||0||UNICODE||\x0dMSA|AA|"+received_msg_id+b"|message accepted|||0|\x0dQAK|SR|OK|\x0d\x1c\x0d"
     if(message_tuple[0][8]==b'ORU^R01'):
-      self.write_msg=b"\x0bMSH|^~\&|||||"+msg_time+b"||"+ack_msg_type[message_tuple[0][8]]+b"|"+msg_control_id+b"|P|2.3.1||||0||UNICODE||\x0dMSA|AA|"+received_msg_id+b"|message accepted|||0\x0d\x1c\x0d"
-
+      #self.write_msg=b"\x0bMSH|^~\&|||||"+msg_time+b"||"+ack_msg_type[message_tuple[0][8]]+b"|"+msg_control_id+b"|P|2.3.1||||0||UNICODE||\x0dMSA|AA|"+received_msg_id+b"|message accepted|||0\x0d\x1c\x0d"
+      #self.write_msg=b"\x0bMSH|^~\&|||||"+msg_time+b"||"+ack_msg_type[message_tuple[0][8]]+b"|"+msg_control_id+b"|P|2.3.1||||0||UNICODE||\x0dMSA|AA|"+received_msg_id+b"|message accepted|||0\x0d\x1c\x0d"
+      self.write_msg=b"\x0bMSH|^~\&|||||"+msg_time+b"||"+ack_msg_type[message_tuple[0][8]]+b"|"+received_msg_id+b"|P|2.3.1||||0||UNICODE||\x0dMSA|AA|"+received_msg_id+b"|message accepted|||0\x0d\x1c\x0d"
 
     fml=file_management_lis(conf.inbox_data,conf.inbox_arch,conf.outbox_data,conf.outbox_arch)
     new_file=fml.get_inbox_filename()

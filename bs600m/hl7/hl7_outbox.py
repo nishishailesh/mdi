@@ -186,7 +186,8 @@ def make_dsr(source_msg_control_id,query_sample_id,ex_tuple):
   #msg_control_id=dt.strftime("%Y%m%d%H%M%S%f")
   #msg_control_id=dt.strftime("%Y%m%d%H%M%S")
   msg_control_id=str(round(1000+random.random()*1000))
-  MSH='MSH|^~\&|||||'+msg_time+'||DSR^Q03|'+msg_control_id+'|P|2.3.1||||||ASCII|||'
+  #MSH='MSH|^~\&|||||'+msg_time+'||DSR^Q03|'+msg_control_id+'|P|2.3.1||||||ASCII|||'
+  MSH='MSH|^~\&|||||'+msg_time+'||DSR^Q03|'+source_msg_control_id+'|P|2.3.1||||||ASCII|||'
   MSA='MSA|AA|'+source_msg_control_id+'|Message accepted|||0|'
   ERR='ERR|0|'
   QAK='QAK|SR|OK|'
