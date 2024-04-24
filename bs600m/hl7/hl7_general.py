@@ -118,7 +118,9 @@ class hl7(bdg):
     if(message_tuple[0][0]==b'MSH'):
       self.print_to_log("MSH is first field of first line:",message_tuple[0][0])
       received_msg_id=message_tuple[0][9]
+      received_msg_time=message_tuple[0][6]
       self.print_to_log("HL7 MSG received_msg_id:",received_msg_id)
+      self.print_to_log("HL7 MSG received_msg_time:",received_msg_time)
     else:
       self.print_to_log("Doing nothing. Because, MSH is not first field of first line:",message_tuple[0][0])
       return
@@ -145,7 +147,8 @@ class hl7(bdg):
     if(message_tuple[0][8]==b'QRY^Q02'):
       #self.write_msg=b"\x0bMSH|^~\&|||||"+msg_time+b"||"+ack_msg_type[message_tuple[0][8]]+b"|"+msg_control_id+b"|P|2.3.1\x0dMSA|AA|"+received_msg_id+b"|message accepted|||0\x0dQAK|SR|OK\x0d\x1c\x0d"
       #self.write_msg=b"\x0bMSH|^~\&|||||"+msg_time+b"||"+ack_msg_type[message_tuple[0][8]]+b"|"+received_msg_id+b"|P|2.3.1\x0dMSA|AA|"+received_msg_id+b"|message accepted|||0\x0dQAK|SR|OK\x0d\x1c\x0d"
-      self.write_msg=b"\x0bMSH|^~\&|||||"+msg_time+b"||"+ack_msg_type[message_tuple[0][8]]+b"|"+received_msg_id+b"|P|2.3.1||||0||UNICODE||\x0dMSA|AA|"+received_msg_id+b"|message accepted|||0|\x0dQAK|SR|OK|\x0d\x1c\x0d"
+      #self.write_msg=b"\x0bMSH|^~\&|||||"+msg_time+b"||"+ack_msg_type[message_tuple[0][8]]+b"|"+received_msg_id+b"|P|2.3.1||||||UNICODE|||\x0dMSA|AA|"+received_msg_id+b"|Message accepted|||0|\x0dERR|0|\x0dQAK|SR|OK|\x0d\x1c\x0d"
+      self.write_msg=b"\x0bMSH|^~\&|||||"+received_msg_time+b"||"+ack_msg_type[message_tuple[0][8]]+b"|"+received_msg_id+b"|P|2.3.1||||||UNICODE|||\x0dMSA|AA|"+received_msg_id+b"|Message accepted|||0|\x0dERR|0|\x0dQAK|SR|OK|\x0d\x1c\x0d"
     if(message_tuple[0][8]==b'ORU^R01'):
       #self.write_msg=b"\x0bMSH|^~\&|||||"+msg_time+b"||"+ack_msg_type[message_tuple[0][8]]+b"|"+msg_control_id+b"|P|2.3.1||||0||UNICODE||\x0dMSA|AA|"+received_msg_id+b"|message accepted|||0\x0d\x1c\x0d"
       #self.write_msg=b"\x0bMSH|^~\&|||||"+msg_time+b"||"+ack_msg_type[message_tuple[0][8]]+b"|"+msg_control_id+b"|P|2.3.1||||0||UNICODE||\x0dMSA|AA|"+received_msg_id+b"|message accepted|||0\x0d\x1c\x0d"

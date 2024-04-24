@@ -193,13 +193,19 @@ def make_dsr(source_msg_control_id,query_sample_id,ex_tuple):
   QAK='QAK|SR|OK|'
   QRD='QRD||'+msg_time+'|R|D|2|||RD||OTH|||T|'
   QRF='QRF|||||||RCT|COR|ALL||'
+  #DSP01='DSP|1|||||'
   DSP21='DSP|21||'+query_sample_id+'|||'
-  message_list=[MSH,MSA,ERR,QAK,QRD,QRF,DSP21]
+  DSP22='DSP|22|||||'
+  DSP24='DSP|24|||||'
+  DSP26='DSP|26||Serum|||'
+  DSC='DSC|1|'
+  
+  message_list=[MSH,MSA,ERR,QAK,QRD,QRF,DSP21,DSP22,DSP24,DSP26]
   count=29
   for ex in ex_tuple:
     message_list=message_list+ [ 'DSP|'+str(count)+'||'+ex+'^^^|||' ]
     count=count+1
-
+  message_list=message_list+ [ DSC ]
   message=mllp_newline.decode("UTF-8").join(message_list)
   message_bytes=message.encode("UTF-8")
   final_message=mllp_start_byte+message_bytes+mllp_newline+mllp_end_byte+mllp_newline
