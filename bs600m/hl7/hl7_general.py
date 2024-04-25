@@ -148,7 +148,8 @@ class hl7(bdg):
       #self.write_msg=b"\x0bMSH|^~\&|||||"+msg_time+b"||"+ack_msg_type[message_tuple[0][8]]+b"|"+msg_control_id+b"|P|2.3.1\x0dMSA|AA|"+received_msg_id+b"|message accepted|||0\x0dQAK|SR|OK\x0d\x1c\x0d"
       #self.write_msg=b"\x0bMSH|^~\&|||||"+msg_time+b"||"+ack_msg_type[message_tuple[0][8]]+b"|"+received_msg_id+b"|P|2.3.1\x0dMSA|AA|"+received_msg_id+b"|message accepted|||0\x0dQAK|SR|OK\x0d\x1c\x0d"
       #self.write_msg=b"\x0bMSH|^~\&|||||"+msg_time+b"||"+ack_msg_type[message_tuple[0][8]]+b"|"+received_msg_id+b"|P|2.3.1||||||UNICODE|||\x0dMSA|AA|"+received_msg_id+b"|Message accepted|||0|\x0dERR|0|\x0dQAK|SR|OK|\x0d\x1c\x0d"
-      self.write_msg=b"\x0bMSH|^~\&|||||"+received_msg_time+b"||"+ack_msg_type[message_tuple[0][8]]+b"|"+received_msg_id+b"|P|2.3.1||||||UNICODE|||\x0dMSA|AA|"+received_msg_id+b"|Message accepted|||0|\x0dERR|0|\x0dQAK|SR|OK|\x0d\x1c\x0d"
+      #self.write_msg=b"\x0bMSH|^~\&|||||"+received_msg_time+b"||"+ack_msg_type[message_tuple[0][8]]+b"|"+received_msg_id+b"|P|2.3.1||||||UNICODE|||\x0dMSA|AA|"+received_msg_id+b"|Message accepted|||0|\x0dERR|0|\x0dQAK|SR|OK|\x0d\x1c\x0d"
+      self.write_msg=b"\x0bMSH|^~\&|||||"+msg_time+b"||"+ack_msg_type[message_tuple[0][8]]+b"|"+received_msg_id+b"|P|2.3.1||||||UNICODE|||\x0dMSA|AA|"+received_msg_id+b"|Message accepted|||0|\x0dERR|0|\x0dQAK|SR|OK|\x0d\x1c\x0d"
     if(message_tuple[0][8]==b'ORU^R01'):
       #self.write_msg=b"\x0bMSH|^~\&|||||"+msg_time+b"||"+ack_msg_type[message_tuple[0][8]]+b"|"+msg_control_id+b"|P|2.3.1||||0||UNICODE||\x0dMSA|AA|"+received_msg_id+b"|message accepted|||0\x0d\x1c\x0d"
       #self.write_msg=b"\x0bMSH|^~\&|||||"+msg_time+b"||"+ack_msg_type[message_tuple[0][8]]+b"|"+msg_control_id+b"|P|2.3.1||||0||UNICODE||\x0dMSA|AA|"+received_msg_id+b"|message accepted|||0\x0d\x1c\x0d"

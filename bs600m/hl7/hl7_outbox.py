@@ -180,25 +180,29 @@ def get_eid_for_sid_code(con,sid,ex_code):
     return False
   return ex_id[0]
 
-def make_dsr(source_msg_control_id,query_sample_id,ex_tuple):
+def make_dsr(source_msg_control_id,source_msg_time,query_sample_id,ex_tuple):
   dt=datetime.datetime.now()
   msg_time=dt.strftime("%Y%m%d%H%M%S")
   #msg_control_id=dt.strftime("%Y%m%d%H%M%S%f")
   #msg_control_id=dt.strftime("%Y%m%d%H%M%S")
   msg_control_id=str(round(1000+random.random()*1000))
   #MSH='MSH|^~\&|||||'+msg_time+'||DSR^Q03|'+msg_control_id+'|P|2.3.1||||||ASCII|||'
-  MSH='MSH|^~\&|||||'+msg_time+'||DSR^Q03|'+source_msg_control_id+'|P|2.3.1||||||ASCII|||'
+  #MSH='MSH|^~\&|||||'+msg_time+'||DSR^Q03|'+source_msg_control_id+'|P|2.3.1||||||ASCII|||'
+  MSH='MSH|^~\&|||||'+source_msg_time+'||DSR^Q03|'+source_msg_control_id+'|P|2.3.1||||||UNICODE|||'
   MSA='MSA|AA|'+source_msg_control_id+'|Message accepted|||0|'
   ERR='ERR|0|'
   QAK='QAK|SR|OK|'
-  QRD='QRD||'+msg_time+'|R|D|2|||RD||OTH|||T|'
-  QRF='QRF|||||||RCT|COR|ALL||'
+  #QRD='QRD||'+msg_time+'|R|D|2|||RD||OTH|||T|'
+  #QRD='QRD|'+source_msg_time+'|R|D|'+source_msg_control_id+'|||RD||OTH|||T|'
+  #QRD='QRD|'+source_msg_time+'|R|D|'+source_msg_control_id+'|||RD|'+query_sample_id+'|OTH|||T|'
+  QRD='QRD|'+source_msg_time+'|R|D|'+source_msg_control_id+'|||RD||OTH|||T|'
+  QRF='QRF||||||RCT|COR|ALL||'
   #DSP01='DSP|1|||||'
   DSP21='DSP|21||'+query_sample_id+'|||'
   DSP22='DSP|22|||||'
-  DSP24='DSP|24|||||'
+  DSP24='DSP|24||N|||'
   DSP26='DSP|26||Serum|||'
-  DSC='DSC|1|'
+  DSC='DSC||'
   
   message_list=[MSH,MSA,ERR,QAK,QRD,QRF,DSP21,DSP22,DSP24,DSP26]
   count=29
@@ -215,6 +219,7 @@ def make_dsr(source_msg_control_id,query_sample_id,ex_tuple):
 def manage_query(tpl):
   print_to_log("manage_query() data",tpl)
   source_msg_control_id=tpl[0][9]
+  source_msg_time=tpl[0][6]
   print_to_log("manage_query() source_msg_control_id:",source_msg_control_id)
   query_sample_id=b''
   for one_line in tpl:
@@ -256,7 +261,7 @@ def manage_query(tpl):
     data=mysql_db.get_single_row(cur)
   print_to_log('ex requested for query_sample_id={} and real_sample_id={} are'.format(query_sample_id,real_sample_id),ex_tuple)
 
-  final_str=make_dsr(source_msg_control_id.decode("UTF-8"),query_sample_id,ex_tuple)
+  final_str=make_dsr(source_msg_control_id.decode("UTF-8"),source_msg_time.decode("UTF-8"),query_sample_id,ex_tuple)
   fname=fml.get_outbox_filename()
   print_to_log('file to be written',fname)
   fd=open(fname,'bw')
