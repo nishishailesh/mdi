@@ -23,58 +23,9 @@ class hl7(bdg):
 
     signal.signal(signal.SIGALRM, self.signal_handler)
 
-  '''
-  2024-04-26 00:48:12,240 : 10 hl7::manage_read()  data chunk : 
-  
-     b'\x0bMSH|^~\\&|||||20240426004443||ACK^Q03|5|P|2.3.1||||||UNICODE\rMSA|AA|5||||0\r\x1c\r
-       \x0bMSH|^~\\&|||||20240426004443||QRY^Q02|6|P|2.3.1||||||UNICODE|||\rQRD|20240426004443|R|D|6|||RD|P64238|OTH|||T|\rQRF||||||RCT|COR|ALL||\r\x1c\r'
-    
-    This is ACK to message control id: b'5'
-  '''
-
-
   def manage_read(self,data):
     self.print_to_log('self.hl7_message_status: on entry',self.hl7_message_status)
     self.print_to_log("hl7::manage_read()  data chunk :",data)
-
-    data_length=len(data)
-    for each_byte in data:
-      if(chr(each_byte).encode()==self.mllp_start_byte):
-        signal.alarm(0)
-        self.print_to_log('Stopping: alarm','')
-        self.raw_data=chr(each_byte).encode() #starting new raw data. make sure that raw data was managed on previous end_byte. Otherwise data will be lost
-        self.hl7_message_status='START_BYTE_RECEIVED'
-        self.print_to_log('self.hl7_message_status:',self.hl7_message_status)
-        signal.alarm(self.alarm_time) #if en bytes not received in alarm_time, staus will become EMPTY and raw_data will be b''
-        self.print_to_log('Starting alarm for seconds:',self.alarm_time)
-
-      else:
-        if(self.hl7_message_status=='START_BYTE_RECEIVED'):
-          self.raw_data=self.raw_data+chr(each_byte).encode()   #any data, including end byte(s) are included in growing raw_data
-
-      if(chr(each_byte).encode()==self.mllp_end_byte):
-        self.print_to_log("end bytes received. hl7::manage_read() full frame without last new_line is :",self.raw_data)
-        self.print_to_log("Let us see (in next for-round)", " if next byte is new_line to complete MLLP")        
-        self.hl7_message_status='END_BYTE_RECEIVED'
-        self.print_to_log('Now self.hl7_message_status is:',self.hl7_message_status)
-
-      if(chr(each_byte).encode()==self.mllp_newline and self.hl7_message_status=='END_BYTE_RECEIVED'):
-        signal.alarm(0) # alarm not needed
-        self.print_to_log('Stopping: alarm',' because new_line obtained after end_byte')
-        self.print_to_log("new_line after end byte is received. hl7::manage_read() full frame including last new_line:",self.raw_data)
-        message_tuple=self.raw_data_to_message_tuple()
-        self.respond_to_message(message_tuple)
-        self.raw_data=b''
-        old_hl7_message_status=self.hl7_message_status
-        self.hl7_message_status='EMPTY'
-        self.print_to_log('Previous self.hl7_message_status was:',old_hl7_message_status)
-        self.print_to_log('Now self.hl7_message_status is:',self.hl7_message_status)
-
-
-  def manage_read_chunk(self,data):
-    self.print_to_log('self.hl7_message_status: on entry',self.hl7_message_status)
-    self.print_to_log("hl7::manage_read()  data chunk :",data)
-
 
     if(chr(data[0]).encode()==self.mllp_start_byte):
       signal.alarm(0)
