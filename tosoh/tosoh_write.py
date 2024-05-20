@@ -215,6 +215,8 @@ def manage_record(record):
   print_to_log("0 = STAT, 1 = transport (LA), 2 = loader : ",record['1'][1:2].strip())
   sample_id=record['1'][2:].strip()
   print_to_log("sample_id:",sample_id)
+  
+  
   print_to_log("### managing record 2 (Sample Number) Not used at all here : ",record['2'])
   uniq=equipment+'_'+record['2']
   print_to_log("### managing record 3 (Measurement value):",record['3'])
@@ -352,15 +354,39 @@ peak_%:{}, "
                              (%s,%s,%s,%s) \
                              ON DUPLICATE KEY UPDATE result=%s'
 
-  if(sample_id.rstrip(' ').isnumeric() == False):
-    print_to_log('sample id is not number?:',sample_id)
-    return False;
+  #if(sample_id.rstrip(' ').isnumeric() == False):
+  #  print_to_log('sample id is not number?:',sample_id)
+  #  return False;
+
+  ##############uNIQUE id cODE##############
+  
+  query_sample_id=sample_id.rstrip(' ')
+  print_to_log('query_sample_id',query_sample_id)
+
+  #####Unique ID code
+  if(query_sample_id.isnumeric() == True):
+    real_sample_id=query_sample_id
+  else:
+    print_to_log('query_sample_id is not number:',query_sample_id)
+    ##Now find sample id for it
+    real_sample_id=find_sample_id_for_unique_id(query_sample_id)
+    print_to_log('real_sample_id={}'.format(real_sample_id),'query_sample_id={}'.format(query_sample_id))
+    if(real_sample_id!=False):
+      real_sample_id=str(real_sample_id)
+      print_to_log('real_sample_id after converting to string is: ', real_sample_id)
+    else:
+      print_to_log('skipping reporting results, because, No real_sample_id  is found.for unique ID=', query_sample_id)
+      return;
+    print_to_log('final real sample id as str =',real_sample_id)
+   #####End of Unique ID code
+  
+  ##########################################
 
   #peak_data_dict: {'A1A': {'peak_persent': '0.5'}, 'A1B': {'peak_persent': '1.4'}, 'F': {'peak_persent': '0.6'}, 'LA1C+': {'peak_persent': '3.6'}, 'SA1C': {'peak_persent': '10.8'}, 'A0': {'peak_persent': '85.1'}}
 
   for code,code_data in peak_data_dict.items():
-    eid=get_eid_for_sid_code(ms,con,sample_id,code,equipment)
-    data_tpl=(sample_id,eid,code_data['peak_persent'],uniq,code_data['peak_persent'])        
+    eid=get_eid_for_sid_code(ms,con,real_sample_id,code,equipment)
+    data_tpl=(real_sample_id,eid,code_data['peak_persent'],uniq,code_data['peak_persent'])        
     try:          
       cur=ms.run_query(con,prepared_sql,data_tpl)
       msg=prepared_sql
@@ -377,8 +403,8 @@ peak_%:{}, "
       print_to_log('exception description:',my_ex)
 
   #for chromatogram, 'chrom' is nowhere in data!!! It is my creation. Similar entry required in host_code
-  chrom_eid=get_eid_for_sid_code_blob(ms,con,sample_id,'chrom',equipment)  
-  data_tpl=(sample_id,chrom_eid,png,uniq,png)
+  chrom_eid=get_eid_for_sid_code_blob(ms,con,real_sample_id,'chrom',equipment)  
+  data_tpl=(real_sample_id,chrom_eid,png,uniq,png)
 
   try:          
     cur=ms.run_query(con,prepared_sql_blob,data_tpl)
@@ -396,10 +422,59 @@ peak_%:{}, "
     #print_to_log('data tuple:',msg)
     print_to_log('exception description:',my_ex)
 
+
+
+
+def find_sample_id_for_unique_id(uid):
+  ms=my_sql()
+  con=ms.get_link(astm_var.my_host,astm_var.my_user,astm_var.my_pass,astm_var.my_db)
+
+  logging.debug('find_sample_id_for_unique_id(con,uid): sample id is not number. but,unique id provided is {}'.format(uid))
+
+  prepared_sql='select \
+                      examination_id, \
+                      json_extract(edit_specification,\'$.unique_prefix\') as unique_prefix, \
+                      json_extract(edit_specification,\'$.table\') as id_table \
+                  from examination \
+                  where \
+                      json_extract(edit_specification,\'$.type\')="id_single_sample"';
+
+  logging.debug('find_sample_id_for_unique_id(con,uid): prepared_sql is:\n {}'.format(prepared_sql))
+  cur=ms.run_query(con,prepared_sql,())
+  logging.debug("one data:{}".format(cur))
+  data=ms.get_single_row(cur)
+  while data:
+    logging.debug("one data:{}".format(data))
+    striped_data=(data[0],data[1].lstrip('"').rstrip('"'),data[2].lstrip('"').rstrip('"'))
+    logging.debug("one striped data:{}".format(striped_data))
+    logging.debug("unique prefix length data in uid is : {} ?=? {} : is unique _prefix is".format(uid[0:len(striped_data[1])],striped_data[1]))
+    if(uid[0:len(striped_data[1])]==striped_data[1]):
+      #logging.debug(">>>>search table={} , search id is={}".format(striped_data[2], uid[len(striped_data[1]):] ))
+      table_name=striped_data[2]
+      unique_id=uid[len(striped_data[1]):]
+      logging.debug(">>>>search table={} , search id is={}".format(table_name,unique_id))
+      prepared_sql_for_finding_sample_id="select sample_id from `"+table_name+"` where id=%s";
+      logging.debug("prepared_sql_for_finding_sample_id = {}".format(prepared_sql_for_finding_sample_id))
+
+      data_tpl_for_finding_sample_id=(unique_id,)          # (), (123,) are valid tuple. BUT, (,) (123) are not valid. see type(tpl) at python prompt
+      logging.debug("data_tpl_for_finding_sample_id = {}".format(data_tpl_for_finding_sample_id))
+
+      cur_for_finding_sample_id=ms.run_query(con,prepared_sql_for_finding_sample_id,data_tpl_for_finding_sample_id)
+      data_for_finding_sample_id=ms.get_single_row(cur_for_finding_sample_id)
+      logging.debug('sample id related data found is: {}'.format(data_for_finding_sample_id))
+      if(data_for_finding_sample_id != None):
+        return data_for_finding_sample_id[0]
+      else:
+        return False
+    data=ms.get_single_row(cur)
+  return False
+
+
+
 while True:
   if(f.get_first_inbox_file()):
     all_record_tuple=analyse_file(f.fh)
     #print_to_log("all record:",all_record_tuple)
     manage_all_record(all_record_tuple)
     f.archive_inbox_file()
-    time.sleep(1)
+  time.sleep(1)
