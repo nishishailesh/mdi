@@ -37,7 +37,8 @@ class astm_file_xl1000(astm_file):
 
       for each_record in each_sample[1]:
         if(each_record[0]=='R'):
-          query_sample_id=each_sample[0].rstrip(' ')
+          #query_sample_id=each_sample[0].rstrip(' ')
+          query_sample_id=each_sample[0].rstrip(' ').split(self.s3)[0]
           print_to_log('query_sample_id',query_sample_id)
           
           #####Unique ID code
