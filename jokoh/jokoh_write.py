@@ -164,8 +164,14 @@ def analyse_file(fh):
                              ON DUPLICATE KEY UPDATE result=%s'
 
   for jeid in result_dict.keys():
-    eid=get_eid_for_sid_code(ms,con,sid,ex_code,equipment)
-  #data_tpl=(real_sample_id,
+    ms=my_sql()
+    con=ms.get_link(astm_var.my_host,astm_var.my_user,astm_var.my_pass,astm_var.my_db)
+    eid=get_eid_for_sid_code(ms,con,real_sample_id,jeid,equipment)
+    print_to_log(jeid,eid)
+    if(eid!=False):
+      data_tpl=(real_sample_id,eid,result_dict[jeid].decode("UTF-8"),datetime_of_analysis.decode("UTF-8")+"|"+equipment,result_dict[jeid].decode("UTF-8"))
+      print_to_log('data_tpl',data_tpl)
+      cur=ms.run_query(con,prepared_sql,data_tpl)
 
 def find_sample_id_for_unique_id(uid):
   ms=my_sql()

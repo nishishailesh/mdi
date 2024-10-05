@@ -6,10 +6,10 @@ import serial
 import logging
 #Globals for debug, debug=1#########
 debug=1
-logging.basicConfig(filename='/var/log/lokoh_read.log',level=logging.DEBUG)
+logfile_name='/var/log/jokoh.in.log'
+logging.basicConfig(filename=logfile_name,level=logging.DEBUG)
 #logging.debug("hiii");
 #Globals for configuration##########
-logfile_name='/var/log/jokoh.in.log'
 inbox_data='/root/jokoh.inbox.data/' #remember ending/
 inbox_arch='/root/jokoh.inbox.arch/' #remember ending/
 input_tty='/dev/ttyS1'
