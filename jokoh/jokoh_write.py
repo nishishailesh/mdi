@@ -121,13 +121,22 @@ def analyse_file(fh):
   datetime_of_analysis=data[0:14]
   print_to_log("datetime:",datetime_of_analysis)
 
-  received_sample_id=data[22:39]
-  print_to_log("received_sample_id:",received_sample_id)
-
+  received_sample_id=data[22:39].lstrip().rstrip().decode("UTF-8")
+  print_to_log("striped received_sample_id:",received_sample_id)
+  if(received_sample_id.isnumeric()==True):
+    real_sample_id=received_sample_id
+  else:
+    real_sample_id=find_sample_id_for_unique_id(received_sample_id)
+  if(real_sample_id==False):
+    print_to_log("real sample id not found for received sample_id:",received_sample_id)
+    print_to_log("Not doing anything:","Good By")
+    return False
+  else:
+    print_to_log("real_sample_id:",real_sample_id)
   item_number1=data[42:44]
   print_to_log("item number1:",item_number1)
   item_value1=data[44:49]
-  print_to_log("item value1:",item_value1)  
+  print_to_log("item value1:",item_value1)
   error_code1=data[50:51]
   print_to_log("error_code1:",error_code1) 
 
@@ -137,15 +146,27 @@ def analyse_file(fh):
   print_to_log("item value2:",item_value2)  
   error_code2=data[59:60]
   print_to_log("error_code2:",error_code2) 
-    
+
   item_number3=data[60:62]
   print_to_log("item number3:",item_number3)
   item_value3=data[62:67]
-  print_to_log("item value3:",item_value3)  
+  print_to_log("item value3:",item_value3)
   error_code3=data[68:69]
   print_to_log("error_code2:",error_code3) 
 
-          
+  result_dict={item_number1:item_value1,item_number2:item_value2,item_number3:item_value3}
+  print_to_log("result_dict:",result_dict)
+
+  prepared_sql='insert into primary_result \
+                             (sample_id,examination_id,result,uniq) \
+                             values \
+                             (%s,%s,%s,%s) \
+                             ON DUPLICATE KEY UPDATE result=%s'
+
+  for jeid in result_dict.keys():
+    eid=get_eid_for_sid_code(ms,con,sid,ex_code,equipment)
+  #data_tpl=(real_sample_id,
+
 def find_sample_id_for_unique_id(uid):
   ms=my_sql()
   con=ms.get_link(astm_var.my_host,astm_var.my_user,astm_var.my_pass,astm_var.my_db)
