@@ -133,25 +133,25 @@ def analyse_file(fh):
     return False
   else:
     print_to_log("real_sample_id:",real_sample_id)
-  item_number1=data[42:44]
+  item_number1=data[42:44].lstrip().rstrip()
   print_to_log("item number1:",item_number1)
-  item_value1=data[44:49]
+  item_value1=data[44:49].lstrip().rstrip()
   print_to_log("item value1:",item_value1)
-  error_code1=data[50:51]
+  error_code1=data[50:51].lstrip().rstrip()
   print_to_log("error_code1:",error_code1) 
 
-  item_number2=data[51:53]
+  item_number2=data[51:53].lstrip().rstrip()
   print_to_log("item number2:",item_number2)
-  item_value2=data[53:58]
+  item_value2=data[53:58].lstrip().rstrip()
   print_to_log("item value2:",item_value2)  
-  error_code2=data[59:60]
+  error_code2=data[59:60].lstrip().rstrip()
   print_to_log("error_code2:",error_code2) 
 
-  item_number3=data[60:62]
+  item_number3=data[60:62].lstrip().rstrip()
   print_to_log("item number3:",item_number3)
-  item_value3=data[62:67]
+  item_value3=data[62:67].lstrip().rstrip()
   print_to_log("item value3:",item_value3)
-  error_code3=data[68:69]
+  error_code3=data[68:69].lstrip().rstrip()
   print_to_log("error_code2:",error_code3) 
 
   result_dict={item_number1:item_value1,item_number2:item_value2,item_number3:item_value3}

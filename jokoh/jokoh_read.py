@@ -31,7 +31,7 @@ def signal_handler(signal, frame):
 
 def get_filename():
   dt=datetime.datetime.now()
-  return output_folder+dt.strftime("%Y-%m-%d-%H-%M-%S-%f")
+  return inbox_data+dt.strftime("%Y-%m-%d-%H-%M-%S-%f")
  
 #Globals############################
 byte_array=[]
