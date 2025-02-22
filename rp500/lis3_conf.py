@@ -5,7 +5,7 @@ lis3_file2mysql_log_filename='/var/log/rp500_write.log'
 #host_address='12.207.3.240'
 #host_address='11.207.1.1'
 #if you wish general declaration
-host_address='11.207.2.200'
+host_address='172.16.2.200'
 host_port=2578
 select_timeout=1
 alarm_time=10

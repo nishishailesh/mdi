@@ -1,0 +1,14 @@
+#!/usr/bin/python3.7
+my_user='tosoh'
+my_pass='password for mysql database'
+my_host='12.207.3.240'
+my_db='cl_general'
+
+'''
+example /var/gmcs_config/astm_var.py
+used to hide password of mysql at some secure place
+------------------------------------
+self.get_link(astm_var.my_host,astm_var.my_user,astm_var.my_pass,astm_var.my_db)
+
+'''
+

@@ -1,0 +1,9 @@
+[Unit]
+Description=Read+Write data from VItros3600 to/from inbox/outbox using ASTM Protocol
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/root/mdi/NXL_1000/astmbi/astm_bidirectional_general.py
+[Install]
+WantedBy=multi-user.target
