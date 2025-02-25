@@ -1,0 +1,90 @@
+.:
+total 72
+drwxr-xr-x 3 root root  4096 Dec  9 17:55 astmbi
+drwxr-xr-x 2 root root  4096 Dec  8 11:04 client
+drwxr-xr-x 2 root root  4096 Dec  8 11:04 common
+drwxr-xr-x 2 root root  4096 Dec  8 11:04 conf
+drwxr-xr-x 4 root root  4096 Dec  8 11:04 equipment
+-rw-r--r-- 1 root root     0 Dec 14 00:11 file.details
+-rw-r--r-- 1 root root 35149 Dec  8 11:04 LICENSE
+drwxr-xr-x 2 root root  4096 Dec  8 11:04 misc
+-rw-r--r-- 1 root root    65 Dec  8 11:04 README.md
+-rwxr-xr-x 1 root root    80 Dec 14 00:09 update_astmbi_unix.sh
+drwxr-xr-x 2 root root  4096 Dec  8 11:04 utility
+
+./astmbi:
+total 116
+-rwxr-xr-x 1 root root  3705 Dec  8 11:09 astm_bidirectional_common.py
+-rw-r--r-- 1 root root   520 Dec  8 11:21 astm_bidirectional_conf.py
+-rwxr-xr-x 1 root root 14246 Dec  9 12:05 astm_bidirectional_general_line_by_line.py
+-rwxr-xr-x 1 root root 12888 Dec  8 11:09 astm_bidirectional_general_old.py
+-rwxr-xr-x 1 root root 14847 Dec  9 17:55 astm_bidirectional_general.py
+-rwxr-xr-x 1 root root 13179 Dec  8 11:09 astm_bidirectional_general.py.orig
+-rwxr-xr-x 1 root root  9894 Dec  8 11:09 astm_file2mysql_bidirectional_cl_general_vitros.py
+-rwxr-xr-x 1 root root 11577 Dec  8 11:09 astm_file2mysql_bidirectional_general.py
+-rwxr-xr-x 1 root root  9123 Dec  8 11:09 bidirectional_general.py
+drwxr-xr-x 2 root root  4096 Dec  8 11:22 __pycache__
+-rwxr-xr-x 1 root root   165 Dec  9 12:09 reset_vitros_service
+
+./astmbi/__pycache__:
+total 32
+-rw-r--r-- 1 root root 4360 Dec  8 11:13 astm_bidirectional_common.cpython-37.pyc
+-rw-r--r-- 1 root root  541 Dec  8 11:22 astm_bidirectional_conf.cpython-37.pyc
+-rw-r--r-- 1 root root 8458 Dec  8 11:13 astm_file2mysql_bidirectional_general.cpython-37.pyc
+-rw-r--r-- 1 root root 5129 Dec  8 11:13 bidirectional_general.cpython-37.pyc
+
+./client:
+total 12
+-rw-r--r-- 1 root root   1 Dec  8 11:04 ack
+-rwxr-xr-x 1 root root 139 Dec  8 11:04 client.sh
+-rw-r--r-- 1 root root   1 Dec  8 11:04 enq
+-rw-r--r-- 1 root root   0 Dec  8 11:04 socat
+
+./common:
+total 92
+-rwxr-xr-x 1 root root  3705 Dec  8 11:04 astm_bidirectional_common.py
+-rw-r--r-- 1 root root   523 Dec  8 11:04 astm_bidirectional_conf.py
+-rwxr-xr-x 1 root root 13982 Dec  8 11:04 astm_bidirectional_general_line_by_line.py
+-rwxr-xr-x 1 root root 12888 Dec  8 11:04 astm_bidirectional_general_old.py
+-rwxr-xr-x 1 root root 13179 Dec  8 11:04 astm_bidirectional_general.py
+-rwxr-xr-x 1 root root  9894 Dec  8 11:04 astm_file2mysql_bidirectional_cl_general_vitros.py
+-rwxr-xr-x 1 root root 11577 Dec  8 11:04 astm_file2mysql_bidirectional_general.py
+-rwxr-xr-x 1 root root  9123 Dec  8 11:04 bidirectional_general.py
+
+./conf:
+total 8
+-rw-r--r-- 1 root root 523 Dec  8 11:04 astm_bidirectional_conf.py
+-rw-r--r-- 1 root root 459 Dec  8 11:04 astm_bidirectional_conf.py.example
+
+./equipment:
+total 8
+drwxr-xr-x 2 root root 4096 Dec  8 11:04 vitros
+drwxr-xr-x 2 root root 4096 Dec  8 11:04 xl_1000
+
+./equipment/vitros:
+total 28
+-rwxr-xr-x 1 root root 13588 Dec  8 11:04 astm_bidirectional_general_each_line.py
+-rwxr-xr-x 1 root root  9959 Dec  8 11:04 astm_file2mysql_bidirectional_cl_general_vitros.py
+
+./equipment/xl_1000:
+total 12
+-rwxr-xr-x 1 root root 9310 Dec  8 11:04 astm_file2mysql_bidirectional_xl_1000.py
+
+./misc:
+total 612
+-rw-r--r-- 1 root root    198 Dec  8 11:04 2020-09-28-13-35-47-810763
+-rw-r--r-- 1 root root   1523 Dec  8 11:04 2020-11-11-22-43-32-223290
+-rw-r--r-- 1 root root    609 Dec  8 11:04 2020-11-21-13-07-24-379581
+-rw-r--r-- 1 root root    101 Dec  8 11:04 2020-11-21-13-10-55-150376
+-rw-r--r-- 1 root root    156 Dec  8 11:04 2020-11-21-13-10-56-028439
+-rw-r--r-- 1 root root    171 Dec  8 11:04 2020-12-07-21-31-31-399874
+-rw-r--r-- 1 root root 598247 Dec  8 11:04 LCI.932.txt
+
+./utility:
+total 24
+-rwxr-xr-x 1 root root 248 Dec  8 11:04 astmbi_read.service
+-rwxr-xr-x 1 root root 230 Dec  8 11:04 astmbi_write.service
+-rwxr-xr-x 1 root root 149 Dec  8 11:04 COPY_SERVICE.sh
+-rwxr-xr-x 1 root root 131 Dec  8 11:04 INSTALL_SERVICE.sh
+-rwxr-xr-x 1 root root 126 Dec  8 11:04 mk_folders
+-rwxr-xr-x 1 root root 166 Dec  8 11:04 reset_everything.sh

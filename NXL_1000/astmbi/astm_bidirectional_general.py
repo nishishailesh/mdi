@@ -5,6 +5,10 @@ import bidirectional_general as astmg
 import astm_bidirectional_conf as conf
 from astm_bidirectional_common import file_mgmt, print_to_log
 
+#smb specific code
+import get_smb
+#get_img_from_machine('IPU','sysmax','c9.0','//IPU/shared','/PNG/20250221/2025_02_24_09_21_1040_RBC.PNG')
+
 class astms(astmg.astmg, file_mgmt):
   def __init__(self,inbox_data,inbox_arch,outbox_data,outbox_arch,alarm_time,host_address,host_port,select_timeout):
     self.main_status=0

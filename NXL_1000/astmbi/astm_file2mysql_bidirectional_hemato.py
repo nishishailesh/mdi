@@ -11,6 +11,10 @@ import datetime
 import astm_bidirectional_conf as conf
 from astm_file2mysql_bidirectional_general import astm_file
 
+#smb specific code
+import get_smb
+#get_img_from_machine('IPU','sysmax','c9.0','//IPU/shared','/PNG/20250221/2025_02_24_09_21_1040_RBC.PNG')
+
 #For mysql password
 sys.path.append('/var/gmcs_config')
 
@@ -51,6 +55,19 @@ class astm_file_xl1000(astm_file):
                              (%s,%s,%s,%s) \
                              ON DUPLICATE KEY UPDATE result=%s'
 
+    '''
+    sample_id	bigint(20)	
+    examination_id	int(11)	
+    uniq	varchar(100)	
+    result	mediumblob NULL	
+    fname	varchar(100) NULL	
+    extra	varchar(5000) NULL	
+    '''
+    prepared_sql_blob='insert into primary_result_blob \
+                             (sample_id,examination_id,result,uniq,fname) \
+                             values \
+                             (%s,%s,%s,%s,%s) \
+                             ON DUPLICATE KEY UPDATE result=%s , fname=%s'
 
     prepared_sql_q='select r.sample_id,r.examination_id, h.code from result r,host_code h \
                       where \
@@ -93,6 +110,13 @@ class astm_file_xl1000(astm_file):
       for each_record in each_sample[1]:
         if(each_record[0]=='R'):
 
+
+          ''' 
+          ^B4R|47|^^^^SCAT_WDF|PNG&R&20250221&R&2025_02_24_09_21_1040_WDF.PNG|||N||F||||20250224092138
+          ^B5R|48|^^^^SCAT_WDF-CBC|PNG&R&20250221&R&2025_02_24_09_21_1040_WDF_CBC.PNG|||N||F||||20250224092138
+          ^B6R|49|^^^^DIST_RBC|PNG&R&20250221&R&2025_02_24_09_21_1040_RBC.PNG|||N||F||||20250224092138
+          ^B7R|50|^^^^DIST_PLT|PNG&R&20250221&R&2025_02_24_09_21_1040_PLT.PNG|||N||F||||20250224092138
+          '''
           #########Starting analysis############
           print_to_log('R tuple:',each_record)
           ex_code=each_record[2].split(self.s3)[4]
@@ -102,7 +126,12 @@ class astm_file_xl1000(astm_file):
           print_to_log('can unique string made from each_record[12] + conf.equipment: ',each_record[12] +"|"+conf.equipment)
           uniq='{}|{}'.format(each_record[12],conf.equipment)
 
-          examination_id=self.get_eid_for_sid_code(con,real_sample_id,ex_code)
+          img_type_machine_ex_names=('SCAT_WDF','SCAT_WDF-CBC','DIST_RBC','DIST_PLT')
+          if(ex_code in  img_type_machine_ex_names):
+            examination_id=self.get_eid_for_sid_code_blob(con,real_sample_id,ex_code)
+          else:
+            examination_id=self.get_eid_for_sid_code(con,real_sample_id,ex_code)
+
           print_to_log('LIS software examination_id for machine supplied ex_code is: ',examination_id)
           if(examination_id==False):
             msg="Skipping the while loop once"
@@ -110,24 +139,61 @@ class astm_file_xl1000(astm_file):
             continue
           print_to_log('Final Pair is examination_id={}'.format(examination_id),'ex_result={}'.format(ex_result))
 
-          data_tpl=(real_sample_id,examination_id,ex_result,uniq,ex_result)
-          print_to_log("data_tpl=",data_tpl)
-          try:
-            cur=self.run_query(con,prepared_sql,data_tpl)
+          if(ex_code not in  img_type_machine_ex_names):
+            try:
+              data_tpl=(real_sample_id,examination_id,ex_result,uniq,ex_result)
+              print_to_log("data_tpl=",data_tpl)
+              msg=prepared_sql
+              print_to_log('R prepared_sql:',msg)
+              msg=data_tpl
+              print_to_log('R data tuple:',msg)
+              cur=self.run_query(con,prepared_sql,data_tpl)
+              print_to_log('R cursor:',cur)
+              self.close_cursor(cur)
+            except Exception as my_ex:
+              msg=prepared_sql
+              print_to_log('R prepared_sql:',msg)
+              msg=data_tpl
+              print_to_log('R data tuple:',msg)
+              print_to_log('R exception description:',my_ex)
+          else:
+            try:
+              print_to_log('ex_code is {}. So blob management...:', ex_code)
+              print_to_log('R tuple:',each_record)
+              #DEBUG:root:R tuple: ('R', '47', '^^^^SCAT_WDF', 'PNG&R&20250221&R&2025_02_24_09_21_1040_WDF.PNG', '', '', 'N', '', 'F', '', '', '', '20250224092138')
+              print_to_log('File path field is:',each_record[3])
+              print_to_log('File path could be:',each_record[3].replace("&R&",'/'))
+              print_to_log('final File path with slash will be:','/'+each_record[3].replace("&R&",'/'))
+              file_path='/'+each_record[3].replace("&R&",'/')
+              img_file_name=file_path.split('/')[3]	#actually 2 but due to added slash one more
+              img_data=get_smb.get_img_from_machine(conf.smb_workgroup,
+                                                    conf.smb_username,
+                                                    conf.smb_password,
+                                                    conf.smb_string_with_unix_slash,
+                                                    file_path)
+              #f=open("x.png","+bw")
+              #f.write(img_data)
+              #prepared_sql_blob='insert into primary_result_blob \
+              #                              (sample_id,examination_id,result,uniq,fname) \
+              #                              values \
+              #                              (%s,%s,%s,%s,%s,%s,%s) \
+              #                              ON DUPLICATE KEY UPDATE result=%s , fname=%s'
 
-            msg=prepared_sql
-            print_to_log('R prepared_sql:',msg)
-            msg=data_tpl
-            print_to_log('R data tuple:',msg)
-            print_to_log('R cursor:',cur)
-            self.close_cursor(cur)
+              data_tpl=(real_sample_id,examination_id,img_data,uniq,img_file_name,img_data,img_file_name)
+              print_to_log("R data_tpl=",data_tpl)
+              print_to_log('R prepared_sql_blob:',prepared_sql_blob)
+              cur=self.run_query(con,prepared_sql_blob,data_tpl)
+              print_to_log('R cursor:',cur)
+              self.close_cursor(cur)
+            except Exception as my_ex:
+              print_to_log('exception:ex_code is {}. So blob management...:',ex_code)
+              msg=prepared_sql_blob
+              print_to_log('R prepared_sql_blob:',msg)
+              msg=data_tpl
+              print_to_log('R data tuple:',msg)
+              print_to_log('R exception description:',my_ex)
 
-          except Exception as my_ex:
-            msg=prepared_sql
-            print_to_log('R prepared_sql:',msg)
-            msg=data_tpl
-            print_to_log('R data tuple:',msg)
-            print_to_log('R exception description:',my_ex)
+
 
         if(each_record[0]=='Q'):
 
@@ -288,6 +354,46 @@ class astm_file_xl1000(astm_file):
     logging.debug(data_tplc)
     curc=self.run_query(con,prepared_sqlc,data_tplc)
     
+    eid_tplc=()
+    datac=self.get_single_row(curc)
+    while datac:
+      logging.debug(datac)
+      eid_tplc=eid_tplc+(datac[0],)
+      datac=self.get_single_row(curc)
+    logging.debug(eid_tplc)
+
+    ex_id=tuple(set(eid_tpl) & set(eid_tplc))
+    logging.debug('final examination id:'+str(ex_id))
+    if(len(ex_id)!=1):
+      msg="Number of examination_id found is {}. only 1 is acceptable.".format(len(ex_id))
+      logging.debug(msg)
+      return False
+    return ex_id[0]
+
+  def get_eid_for_sid_code_blob(self,con,sid,ex_code):
+    logging.debug(sid)
+    prepared_sql='select examination_id from result_blob where sample_id=%s'
+    data_tpl=(sid,)
+    logging.debug(prepared_sql)
+    logging.debug(data_tpl)
+
+    cur=self.run_query(con,prepared_sql,data_tpl)
+
+    eid_tpl=()
+    data=self.get_single_row(cur)
+    while data:
+      logging.debug(data)
+      eid_tpl=eid_tpl+(data[0],)
+      data=self.get_single_row(cur)
+    logging.debug(eid_tpl)
+
+
+    prepared_sqlc='select examination_id from host_code where code=%s and equipment=%s'
+    data_tplc=(ex_code,self.equipment)
+    logging.debug(prepared_sqlc)
+    logging.debug(data_tplc)
+    curc=self.run_query(con,prepared_sqlc,data_tplc)
+
     eid_tplc=()
     datac=self.get_single_row(curc)
     while datac:

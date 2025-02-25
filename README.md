@@ -16,6 +16,7 @@ If You are looking for following, this repository may be useful
     6. Yocoh Electrolyte analysers
     7. Ortho Diagnostics
         1. Vitros 3600
+    9. Sysmax XN-1000 and related ( with samba and image transfer)
 
 This is a repository for various medical device interfacing scripts.
 Many of the interfacing scripts in different folders are actually same or very simillar.
