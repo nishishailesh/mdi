@@ -1,4 +1,0 @@
-mkdir /root/NXL_1000.inbox.data/
-mkdir /root/NXL_1000.inbox.arch/
-mkdir /root/NXL_1000.outbox.data/
-mkdir /root/NXL_1000.outbox.arch/

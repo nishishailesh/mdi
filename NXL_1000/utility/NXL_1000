@@ -1,6 +1,0 @@
-/var/log/NXL_1000_*.log {
-	size 50M
-	missingok
-	rotate 7
-	compress
-}
