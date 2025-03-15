@@ -10,13 +10,15 @@ If You are looking for following, this repository may be useful
         2. XL-1000
     2. Mindray
         1. BS600M
+        2. BS230
     3. Tosoh HbA1C
     4. Seimence ABG RP500 etc
     5. Radiometer ABL9 etc
     6. Yocoh Electrolyte analysers
     7. Ortho Diagnostics
         1. Vitros 3600
-    9. Sysmax XN-1000 and related ( with samba and image transfer)
+    9. Sysmax XN-330/ 1000 and related ( with samba and image transfer)
+    10. Cobas411 
 
 This is a repository for various medical device interfacing scripts.
 Many of the interfacing scripts in different folders are actually same or very simillar.
