@@ -3,7 +3,7 @@ If You are looking for following, this repository may be useful
 1. Medical Device Interfacing
     1. ASTM
     2. HL7
-    3. some old and new protocols not folling in to above (Mainly ABG / HbA1C analysers etc)
+    3. some old and new protocols not following above (Mainly ABG / HbA1C analysers etc)
 2. Some of the  instruments and manufacturers
     1. Transasia  / Erba
         1. XL-640
@@ -14,7 +14,7 @@ If You are looking for following, this repository may be useful
     3. Tosoh HbA1C
     4. Seimence ABG RP500 etc
     5. Radiometer ABL9 etc
-    6. Yocoh Electrolyte analysers
+    6. Jocoh Electrolyte analysers
     7. Ortho Diagnostics
         1. Vitros 3600
     9. Sysmax XN-330/ 1000 and related ( with samba and image transfer)
