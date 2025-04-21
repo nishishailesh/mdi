@@ -150,14 +150,14 @@ class astm_file_xl1000(astm_file):
             requested_examination_code=()
             while(single_q_data):
               print_to_log('examination_id={}'.format(single_q_data[1]), ' code={}'.format(single_q_data[2]))
-              requested_examination_code=requested_examination_code+(single_q_data[2],)
+              requested_examination_code=requested_examination_code+(single_q_data[2]+'^1',)
               single_q_data=self.get_single_row(cur)
             
             ## Cobas 411 have additional info in index2 (field3)
             ##it is added as index3 (field 4) (field5 is test list)
             ##index5 
             ##readymade string passed, not tuple
-            ex_code_str=additional_str.encode()+b'|^^^'+'^'.join(requested_examination_code).encode()
+            ex_code_str=additional_str.encode()+b'|^^^'+"\\^^^".join(requested_examination_code).encode()
 
             self.close_cursor(cur)
             
@@ -209,14 +209,19 @@ class astm_file_xl1000(astm_file):
     print_to_log('ex_code_str...',ex_code_str)
     #frame_number=1 in headerline, but not used, because only one frame(STX-ETX-LF will be sent per EOT)
     print_to_log('seperators ',self.s1)
-    header_line=  b'1H'+self.s1.encode()+self.s2.encode()+self.s3.encode()+self.s4.encode()+b'|||cl_general'
-    patient_line= b'P|1|||||||'
+    
+    #                H|\^&                                                                    |||cobas-e411|||||host|RSUPL^BATCH|P|1[CR]
+    #                H|\^&                                                                    |||cobas-e411|||||host|RSUPL^BATCH|P|1[CR]
+    #header_line= b'1H'+self.s1.encode()+self.s2.encode()+self.s3.encode()+self.s4.encode()+b'|||cl_general|||||    |
+    header_line=  b'1H'+self.s1.encode()+self.s2.encode()+self.s3.encode()+self.s4.encode()+b'|||cl_general||||||TSDWN^REPLY|P|1'
+    
+    patient_line= b'P|1'
     #order_line=   b'O|1|'+sample_id.encode()+b'^01||'+ex_code_str+b'|R||||||N||||serum'
     #order_line=   b'O|1|'+sample_id.encode()+b'^02||'+ex_code_str+b'|R||||||N||||serum'
     #order_line=   b'O|1|'+sample_id.encode()+b'^03||'+ex_code_str+b'|R||||||N||||serum'
     #order_line=   b'O|1|'+sample_id.encode()+b'||'+ex_code_str+b'|R||||||N||||serum'
-    order_line=   b'O|1|'+sample_id.encode()+b'|'+ex_code_str+b'|R||||||N||||serum'
-    terminator_line=b'L|1N'
+    order_line=   b'O|1|'+sample_id.encode()+b'|'+ex_code_str+b'|R||||||A||||1||||||||||O'
+    terminator_line=b'L|1|N'
     
     str_for_checksum=b'\x02'+header_line+b'\x0d'+patient_line+b'\x0d'+order_line+ b'\x0d'+terminator_line+ b'\x0d\x03'
     checksum=self.get_checksum(str_for_checksum)
